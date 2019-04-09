@@ -1,11 +1,19 @@
+.brand-logo {
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .col {
     border: 1px solid black;
+    
 }
 
 .container {
     margin-top: 20px;
+    
 }
 
 .box {
-    padding: 10px;    
+    padding: 10px;
+    /* margin: 20px; */
 }
