@@ -4,16 +4,40 @@
 }
 
 .col {
-    border: 1px solid black;
     
 }
 
 .container {
     margin-top: 20px;
+    width: 90%;
     
+}
+
+.map-search {
+    border: 1px solid #dddddd;
+    
+}
+
+form {
+    /* background-color: red; */
+    margin: 20px;
+    height: 100%;
 }
 
 .box {
     padding: 10px;
     /* margin: 20px; */
 }
+
+
+#map {
+    /* width: 80%; */
+    border-right: 1px solid #dddddd;
+    height: 550px;
+    z-index:100;
+  }
+ 
+
+  .modal-content {
+      color: black;
+  }

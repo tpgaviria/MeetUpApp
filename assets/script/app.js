@@ -1,11 +1,18 @@
 console.log('testing, hi this is the correct js file :)')
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
 
-  // Or with jQuery
+$(document).ready(function() {
+  $('input#input_text, textarea#textarea2').characterCounter();
+});
+      
+
+// Or with jQuery
+
+$(document).ready(function(){
+  $('.modal').modal();
+});
+      
+
 
   $(document).ready(function(){
     $('.sidenav').sidenav();
