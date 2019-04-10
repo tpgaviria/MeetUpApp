@@ -16,7 +16,7 @@ Chat Functionality
 
 
 
-Materialize, Angular, Moment.js, Leaflet Maps API, Google Places Alternate API, Firebase User Management, Firebase Database
+Technologies used: Materialize, Angular, Moment.js, Leaflet Maps API, Google Places Alternate API, Firebase User Management, Firebase Database
 
 
 
