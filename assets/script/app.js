@@ -34,11 +34,11 @@ $('button').on('click', function () {
 
 function addressSearch() {
 
-  // placeSearch({
-  //   key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-  //   container: document.querySelector('.place-search-input'),
-  //   useDeviceLocation: true
-  // });
+  placeSearch({
+    key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
+    container: document.querySelector('.place-search-input'),
+    useDeviceLocation: true
+  });
 
   var geocodingKey = 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM'
   var location1 = $('#location1').val();
@@ -93,5 +93,9 @@ $('.side-panel').append('<p>' + results + '</p>');
 
 
 function middlePoint() {
+
+
+
+
 
 }
