@@ -7,12 +7,15 @@
     <!-- RESET CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 
+
+
     <!-- MATERIALIZE CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 
     <!-- LEAFLET MAPS CSS -->
     <link rel="stylesheet" href="leaflet/leaflet.css" />
@@ -26,7 +29,12 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <script src="assets/script/firebase.js"></script>
-    
+
+
+
+    <!-- PLACESEARCH -->
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css" />
 
 </head>
 
@@ -79,21 +87,25 @@
             <div id="map" class="col m8 s8">
             </div>
 
-            <div class="col m4 s4 search-form">
+            <div class="col m4 s4 side-panel">
                 <form>
-                    <div class="row">
 
-                        <div class="input-field col s12">
-                            <input id="adress-1" type="text" class="validate">
-                            <label for="address-1">Address 1</label>
-                        </div>
+
+                    <div class="input-field col s12">
+                        <input type="search" class="place-search-input" id="location1" />
+                        <label for="address-1">Address 1</label>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="address-2" type="text" class="validate">
-                            <label for="address-2">Address 2</label>
-                        </div>
+
+                    <div class="input-field col s12">
+                        <input type="search" class="place-search-input" id="location2" />
+                        <label for="address-2">Address 2</label>
                     </div>
+
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Find Middle Point
+                        <i class="material-icons right">send</i>
+                    </button>
+
+
                 </form>
             </div>
 
@@ -102,25 +114,36 @@
 
 
 
-    </div>
 
-    <div class="row">
-        <div class="col s12 m6">
-            <div class="instructions box">
 
-                <p>Instructions go here. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, incidunt.
-                    Ea nobis alias hic laudantium harum ratione sunt saepe sed placeat nesciunt. A voluptatum ipsam,
-                    odio vel iste natus esse laudantium ab similique eos quos corrupti perferendis quaerat error hic?
-                    Sequi culpa vitae ea ullam. Animi, officia. Et molestiae quae provident nisi qui voluptate similique
-                    velit harum libero aliquam accusantium non quisquam aspernatur nostrum consectetur tempora aliquid
-                    quia, saepe sint, ratione deserunt aperiam explicabo autem! Non, voluptatem beatae! Iusto vitae
-                    magni eaque ipsa architecto, corporis nostrum minus molestias consectetur provident, quasi quibusdam
-                    rem aspernatur! Culpa sed provident nostrum voluptatibus aperiam!</p>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="instructions">
 
+                    <p>Instructions go here. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia,
+                        incidunt.
+                        Ea nobis alias hic laudantium harum ratione sunt saepe sed placeat nesciunt. A voluptatum ipsam,
+                        odio vel iste natus esse laudantium ab similique eos quos corrupti perferendis quaerat error
+                        hic?
+                        Sequi culpa vitae ea ullam. Animi, officia. Et molestiae quae provident nisi qui voluptate
+                        similique
+                        velit harum libero aliquam accusantium non quisquam aspernatur nostrum consectetur tempora
+                        aliquid
+                        quia, saepe sint, ratione deserunt aperiam explicabo autem! Non, voluptatem beatae! Iusto vitae
+                        magni eaque ipsa architecto, corporis nostrum minus molestias consectetur provident, quasi
+                        quibusdam
+                        rem aspernatur! Culpa sed provident nostrum voluptatibus aperiam!</p>
+
+                </div>
             </div>
         </div>
 
-        <div class="col s12 m6">
+
+    <!-- closes container -->
+    </div>
+
+
+    <!-- <div class="col s12 m6">
             <div class="contacts box">
 
                 <p>If not logged in, benefits of having an account go here.</p>
@@ -143,10 +166,8 @@
                     tempore magni, eveniet officiis, quasi ducimus fugiat cumque!</p>
 
             </div>
-        </div>
+        </div> -->
 
-    </div>
-    </div>
 
 
 
@@ -183,10 +204,10 @@
 
 
 
+    <script src="assets/script/app.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/script/app.js"></script>
 
     <script src="leaflet/leaflet.js"></script>
     <script src="leaflet/leafletembed.js"></script>

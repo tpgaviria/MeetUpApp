@@ -24,10 +24,13 @@ form {
     height: 100%;
 }
 
-.box {
-    padding: 10px;
-    /* margin: 20px; */
+.instructions {
+    font-size: 16pt;
+    padding: 20px;
+    line-height: 30px;
 }
+
+
 
 
 #map {
