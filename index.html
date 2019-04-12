@@ -2,13 +2,44 @@
 <html>
 
 <head>
-    <title>Meet Up App - Project #1</title>
+    <title>Squadron - Meet Your Friends in the Middle!</title>
+
+    <!-- RESET CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+    <!-- MATERIALIZE CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+    <!-- LEAFLET MAPS CSS -->
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+
+    <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="assets/script/firebase.js"></script>
+
+
+    <!-- Firechat -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+
+
+    <!-- PLACESEARCH -->
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css" />
+
 </head>
 
 
@@ -16,12 +47,30 @@
 
     <nav>
         <div class="nav-wrapper cyan darken-1">
-            <a href="#!" class="brand-logo">Meet Up App</a>
+            <a href="#!" class="brand-logo">Squadron</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="one.html">About</a></li>
                 <li><a href="two.html">Find Friends</a></li>
-                <li><a href="three.html">Create Account</a></li>
+
+
+
+                <!-- Modal Trigger -->
+                <li><a class="modal-trigger" href="#modal1">Create Account</a></li>
+
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Create Account</h4>
+                        <div id="firebaseui-auth-container"></div>
+                        <div id="loader">Loading...</div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    </div>
+                </div>
+
+                <!-- <li><a href="three.html">Create Account</a></li> -->
                 <li><a href="four.html">Sign In</a></li>
             </ul>
         </div>
@@ -37,44 +86,101 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col s12 m6">
-                <div class="map box">
 
-                    <p>Map goes here.</p>
-
-                </div>
+        <div class="row map-search">
+            <div id="map" class="col m8 s8">
             </div>
 
-            <div class="col s12 m6">
-                <div class="search-form box">
-                    <p>Form goes here.</p>
-                </div>
+            <div class="col m4 s4 side-panel">
+                <form>
+
+
+                    <div class="input-field col s12">
+                        <input type="search" id="place-search-input" id="location1" />
+                        <label for="address-1">Address 1</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input type="search" id="place-search-input" id="location2" />
+                        <label for="address-2">Address 2</label>
+                    </div>
+
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Find Middle Point
+                        <i class="material-icons right">send</i>
+                    </button>
+
+
+                </form>
             </div>
 
 
         </div>
 
+
+
+
+
         <div class="row">
-            <div class="col s12 m6">
-                <div class="instructions box">
+            <div class="col s12 m12">
+                <div class="instructions">
 
-                    <p>Instructions go here.</p>
+                    <p>Instructions go here. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia,
+                        incidunt.
+                        Ea nobis alias hic laudantium harum ratione sunt saepe sed placeat nesciunt. A voluptatum ipsam,
+                        odio vel iste natus esse laudantium ab similique eos quos corrupti perferendis quaerat error
+                        hic?
+                        Sequi culpa vitae ea ullam. Animi, officia. Et molestiae quae provident nisi qui voluptate
+                        similique
+                        velit harum libero aliquam accusantium non quisquam aspernatur nostrum consectetur tempora
+                        aliquid
+                        quia, saepe sint, ratione deserunt aperiam explicabo autem! Non, voluptatem beatae! Iusto vitae
+                        magni eaque ipsa architecto, corporis nostrum minus molestias consectetur provident, quasi
+                        quibusdam
+                        rem aspernatur! Culpa sed provident nostrum voluptatibus aperiam!</p>
+
+
+                    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+                    </div>
+
+
+                    <div id="firechat-wrapper">
+                        <button onclick="login('google');">Login with Google</button>
+                    </div>
 
                 </div>
             </div>
-
-            <div class="col s12 m6">
-                <div class="contacts box">
-
-                    <p>If not logged in, benefits of having an account go here.</p>
-                    <p>If logged in, display contacts/friends here.</p>
-
-                </div>
-            </div>
-
         </div>
+
+
+        <!-- closes container -->
     </div>
+
+
+    <!-- <div class="col s12 m6">
+            <div class="contacts box">
+                
+                <p>If not logged in, benefits of having an account go here.</p>
+                <p>If logged in, display contacts/friends here. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Temporibus eligendi unde harum adipisci. Minima cumque doloribus aliquid eveniet porro earum
+                    architecto et quae accusantium eius nihil repellendus deserunt vero magni consequuntur totam
+                    inventore non accusamus natus pariatur qui laudantium, officia illo? Dolore odit explicabo unde
+                    quasi iste nisi eaque ratione voluptatibus quibusdam qui quam ut quae, quisquam nam itaque ipsum id
+                    accusamus ab asperiores molestias eligendi commodi. Saepe placeat tenetur architecto reprehenderit
+                    voluptatem explicabo error blanditiis quas nulla voluptatibus veritatis ullam temporibus molestiae
+                    veniam rerum eius ut recusandae consequuntur, a earum? Temporibus perferendis animi dicta recusandae
+                    fugit minima veritatis ab ipsam necessitatibus repellendus molestiae, a cupiditate porro earum!
+                    Impedit ipsam, temporibus ab facilis veniam illo. Ullam, voluptate distinctio error sequi harum
+                    voluptas atque nisi nesciunt quasi esse, provident quo natus accusantium cumque reiciendis, fugiat
+                    est dicta! Laboriosam architecto dolorem quibusdam necessitatibus repellendus tenetur recusandae hic
+                    nesciunt sequi excepturi? Tenetur facilis veniam minus sed et enim, molestias eos consequatur
+                    distinctio assumenda placeat. Neque consequatur asperiores accusantium quisquam? Sint voluptate
+                    magnam ipsam, eaque quis excepturi quasi sapiente ex temporibus, nostrum cupiditate necessitatibus
+                    quibusdam. Ipsam itaque animi voluptas ut. Iste cupiditate obcaecati, possimus distinctio nobis
+                    tempore magni, eveniet officiis, quasi ducimus fugiat cumque!</p>
+                    
+                </div>
+            </div> -->
+
 
 
 
@@ -111,10 +217,18 @@
 
 
 
+    <script src="assets/script/app.js"></script>
+
+
+
+
+
+    <script src="leaflet/leaflet.js"></script>
+    <script src="leaflet/leafletembed.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/script/app.js"></script>
+
 </body>
 
 </html>
