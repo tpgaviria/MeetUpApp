@@ -3,17 +3,42 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.col {
+
+
+.container {
+    margin-top: 20px;
+    width: 90%;
+    
+}
+
+.map-search {
     border: 1px solid #dddddd;
     
 }
 
-.container {
-    margin-top: 20px;
-    
+form {
+    /* background-color: red; */
+    margin: 20px;
+    height: 100%;
 }
 
-.box {
-    padding: 10px;
-    /* margin: 20px; */
+.instructions {
+    font-size: 16pt;
+    padding: 20px;
+    line-height: 30px;
 }
+
+
+
+
+#map {
+    /* width: 80%; */
+    border-right: 1px solid #dddddd;
+    height: 550px;
+    z-index:100;
+  }
+ 
+
+  .modal-content {
+      color: black;
+  }
