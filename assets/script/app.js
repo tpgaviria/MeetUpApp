@@ -20,7 +20,8 @@ $(document).ready(function () {
 });
 
 
-let midPointCoords = 0;
+let midPointLat = 0;
+let midPointLong = 0;
 
 
 
@@ -99,14 +100,15 @@ function addressSearch() {
     // converting midpoint back to degrees
     let midPointInDeg = radiansToDegrees(midpointInRads);
     // ^ midPointInDegrees can be passed as an argument to the yelp API call function.
-    midPointCoords = midPointInDeg;
+    midPointLat = midPointInDeg[0];
+    midPointLong = midPointInDeg[1];
 
 
     console.log('location 1 radians: ' + loc1CoordsRads);
     console.log('location 2 radians: ' + loc2CoordsRads);
 
     console.log('midpoint in radians: ' + midpointInRads);
-    console.log('midpoint coords: ' + midPointCoords);
+    console.log('midpoint coords: ' + midPointLat + ', ' + midPointLong);
 
 
 
