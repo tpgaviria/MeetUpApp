@@ -1,11 +1,12 @@
 console.log('testing, hi this is the correct js file :)')
 
+var location1;
+var location2;
 
 // materialize - text input styling initialize
 $(document).ready(function () {
   $('input#input_text, textarea#textarea2').characterCounter();
 });
-
 
 
 // materialize - modal functionality
@@ -36,8 +37,6 @@ function addressSearch() {
   // });
 
   var geocodingKey = 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM'
-  var location1 = $('#location1').val();
-  var location2 = $('#location2').val();
   var geocodingURL = 'https://www.mapquestapi.com/geocoding/v1/batch?&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1&location=' + location1 + '&location=' + location2 + '&key=' + geocodingKey;
   var results;
 
@@ -141,7 +140,6 @@ function displayPlaces() {
   var places = $(this).attr("data-name");
   var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?&location=atlanta";
 
-  // Creating an AJAX call for the specific movie button being clicked
   $.ajax({
     url: queryURL,
     headers: { 'Authorization': 'Bearer cTXs93Tu7cOPhOYuXLLZdE5SIIkZRBS19EXdpPFQ3kBP7QyfYF3Uwbk6ZzwygDmXzdFKv0g8ndmZecAPAdKKOm3aeqFhD_wrH2DP6vmneVo0nRIO90SbPc-hjZKuXHYx' },
