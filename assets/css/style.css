@@ -18,6 +18,12 @@
     display: none;
 }
 
+#greeting {
+    margin-right: 10px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
 
 .map-search {
     border: 1px solid #dddddd;
