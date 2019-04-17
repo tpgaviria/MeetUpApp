@@ -59,10 +59,12 @@ var uiConfig = {
 
 
 
-  
+ 
+
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var user = firebase.auth().currentUser;
+      var name;
       if (user != null) {
         user.providerData.forEach(function (profile) {
           console.log("Sign-in provider: " + profile.providerId);
@@ -70,14 +72,19 @@ var uiConfig = {
           console.log("  Name: " + profile.displayName);
           console.log("  Email: " + profile.email);
           console.log("  Photo URL: " + profile.photoURL);
+          
+          name = profile.displayName;
+          profile = profile;
+          console.log(profile);
+          
         });
         
-        $('#greeting').text(profile.displayName + '!');
-        $('#no-user').hide();
-        $('#signed-in').show();
         
       }
-
+      
+      $('#greeting').text(name + '!');
+      $('#no-user').hide();
+      $('#signed-in').show();
       // User is signed in.
     } else {
       // No user is signed in.
