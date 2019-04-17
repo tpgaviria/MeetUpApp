@@ -74,8 +74,8 @@ var uiConfig = {
       }
 
       $('#greeting').append(profile.displayName + '!');
-      $('#no-user').css('display', 'none');
-      $('#signed-in').css('display', '');
+      $('#no-user').hide();
+      $('#signed-in').show();
 
 
       // User is signed in.
