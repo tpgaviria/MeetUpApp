@@ -71,12 +71,12 @@ var uiConfig = {
           console.log("  Email: " + profile.email);
           console.log("  Photo URL: " + profile.photoURL);
         });
+        
+        $('#greeting').text(profile.displayName + '!');
+        $('#no-user').hide();
+        $('#signed-in').show();
+        
       }
-
-      $('#greeting').text(profile.displayName + '!');
-      $('#no-user').hide();
-      $('#signed-in').show();
-
 
       // User is signed in.
     } else {
