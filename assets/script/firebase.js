@@ -73,7 +73,7 @@ var uiConfig = {
         });
       }
 
-      $('#greeting').append(profile.displayName + '!');
+      $('#greeting').text(profile.displayName + '!');
       $('#no-user').hide();
       $('#signed-in').show();
 
@@ -81,6 +81,8 @@ var uiConfig = {
       // User is signed in.
     } else {
       // No user is signed in.
+
+      console.log('no user signed in');
     }
   });
 
