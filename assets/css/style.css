@@ -8,8 +8,16 @@
 .container {
     margin-top: 20px;
     width: 90%;
-    
 }
+
+#no-user {
+    display:;
+}
+
+#signed-in {
+    display: none;
+}
+
 
 .map-search {
     border: 1px solid #dddddd;

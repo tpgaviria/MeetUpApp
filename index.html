@@ -49,30 +49,46 @@
         <div class="nav-wrapper cyan darken-1">
             <a href="#!" class="brand-logo">Squadron</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="one.html">About</a></li>
-                <li><a href="two.html">Find Friends</a></li>
+            <div id="no-user">
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="one.html">About</a></li>
+                    <li><a href="two.html">Find Friends</a></li>
 
 
 
-                <!-- Modal Trigger -->
-                <li><a class="modal-trigger" href="#modal1">Create Account</a></li>
+                    <!-- Modal Trigger -->
+                    <li><a class="modal-trigger" href="#modal1">Create Account</a></li>
 
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                        <h4>Create Account</h4>
-                        <div id="firebaseui-auth-container"></div>
-                        <div id="loader"></div>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <h4>Create Account</h4>
+                            <div id="firebaseui-auth-container"></div>
+                            <div id="loader"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                    </div>
-                </div>
 
-                <!-- <li><a href="three.html">Create Account</a></li> -->
-                <li><a href="four.html">Sign In</a></li>
-            </ul>
+                    <!-- <li><a href="three.html">Create Account</a></li> -->
+                    <li><a href="four.html">Sign In</a></li>
+                </ul>
+            </div>
+
+            <div id="signed-in">
+
+                <ul class="right hide-on-med-and-down">
+                    <li id="greeting">Hello, </li>
+                    <li><a href="one.html">About</a></li>
+                    <li><a href="two.html">Friends</a></li>
+                    <li><a href="four.html">Sign Out</a></li>
+                </ul>
+
+
+            </div>
+
+
         </div>
     </nav>
 
@@ -143,7 +159,7 @@
                             rem aspernatur! Culpa sed provident nostrum voluptatibus aperiam!</p>
                     </div>
 
-                 
+
                     <div id="firechat-wrapper">
                         <button onclick="login('google');">Login with Google to Chat</button>
                     </div>

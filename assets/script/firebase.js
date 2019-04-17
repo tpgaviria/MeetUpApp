@@ -72,6 +72,12 @@ var uiConfig = {
           console.log("  Photo URL: " + profile.photoURL);
         });
       }
+
+      $('#greeting').append(profile.displayName + '!');
+      $('#no-user').css('display', 'none');
+      $('#signed-in').css('display', '');
+
+
       // User is signed in.
     } else {
       // No user is signed in.
