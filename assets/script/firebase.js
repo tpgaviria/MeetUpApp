@@ -85,39 +85,39 @@ firebase.auth().onAuthStateChanged(function (user) {
     $('#no-user').hide();
     $('#signed-in').show();
 
-    $('#sign-out').on('click', firebase.auth().signOut().then(function () {
-      $('#no-user').show();
-      $('#signed-in').hide();
-      // Sign-out successful.
-    }).catch(function (error) {
-
-      console.log('error signing out')
-      // An error happened.
-    }))
     // User is signed in.
   } else {
     // No user is signed in.
-
+    
     console.log('no user signed in');
   }
 });
 
 
+$('#sign-out').on('click', firebase.auth().signOut().then(function () {
+  $('#no-user').show();
+  $('#signed-in').hide();
+  // Sign-out successful.
+}).catch(function (error) {
+
+  console.log('error signing out')
+  // An error happened.
+}))
 
 // firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     // User is signed in.
-//     var displayName = user.displayName;
-//     var email = user.email;
-//     var emailVerified = user.emailVerified;
-//     var photoURL = user.photoURL;
-//     var isAnonymous = user.isAnonymous;
-//     var uid = user.uid;
-//     var providerData = user.providerData;
-//     // ...
-//   } else {
-//     // User is signed out.
-//     // ...
+  //   if (user) {
+    //     // User is signed in.
+    //     var displayName = user.displayName;
+    //     var email = user.email;
+    //     var emailVerified = user.emailVerified;
+    //     var photoURL = user.photoURL;
+    //     var isAnonymous = user.isAnonymous;
+    //     var uid = user.uid;
+    //     var providerData = user.providerData;
+    //     // ...
+    //   } else {
+      //     // User is signed out.
+      //     // ...
 //   }
 // });
 
