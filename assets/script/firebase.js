@@ -94,15 +94,15 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 
-$('#sign-out').on('click', firebase.auth().signOut().then(function () {
-  $('#no-user').show();
-  $('#signed-in').hide();
-  // Sign-out successful.
-}).catch(function (error) {
+// $('#sign-out').on('click', firebase.auth().signOut().then(function () {
+//   $('#no-user').show();
+//   $('#signed-in').hide();
+//   // Sign-out successful.
+// }).catch(function (error) {
 
-  console.log('error signing out')
-  // An error happened.
-}))
+//   console.log('error signing out')
+//   // An error happened.
+// }))
 
 // firebase.auth().onAuthStateChanged(function(user) {
   //   if (user) {
