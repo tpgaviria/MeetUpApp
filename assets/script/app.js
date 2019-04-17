@@ -159,5 +159,64 @@ function addressSearch() {
       var marker = L.marker(latLngArray).addTo(mymap);
     }
 
+
+
+    displayPlaces();
+
   })
 }
+
+console.log(midPointLat + midPointLong);
+
+
+
+function displayPlaces() {
+
+  var places = $(this).attr("data-name");
+  //var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?text=del&latitude=37.786882&longitude=-122.399972";
+  var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=" + midPointLat + "&longitude=" + midPointLong;
+
+  $.ajax({
+    url: queryURL,
+    headers: { 'Authorization': 'Bearer cTXs93Tu7cOPhOYuXLLZdE5SIIkZRBS19EXdpPFQ3kBP7QyfYF3Uwbk6ZzwygDmXzdFKv0g8ndmZecAPAdKKOm3aeqFhD_wrH2DP6vmneVo0nRIO90SbPc-hjZKuXHYx' },
+    method: "GET",
+    dataType: 'json',
+  })
+    .then(function (response) {
+      console.log(response);
+      console.log("hi this is me");
+      $(".side-panel").empty();
+
+
+      for (var i = 0; i < 9; i++) {
+
+
+      var newResult = $('<div>');
+      
+      var name = '<h3>' + response.businesses[i].name + '</h3>';
+      var streetAddress = '<p>' + response.businesses[i].location.display_address[0] + '</p>';
+      var cityAddress = '<p>' + response.businesses[i].location.display_address[1] + '</p>';
+      var categories = '<p>' + response.businesses[i].categories[0].title + '</p>';
+
+
+      // var pTwo = $("<p>").text(address, address1, address2);
+      // var categories = response.Categories;
+      // var pThree = $("<p>").text(categories);
+      // var reviews = response.Reviews;
+      // var pFour = $("<p>").text(reviews);
+      // var img_uRL = response.Image;
+      // var image = $("<img>").attr("src", imgURL);
+      
+      newResult.append(name).append(streetAddress)
+        .append(cityAddress)
+        .append(categories);
+      
+
+      $('.side-panel').append(newResult);
+
+      }
+
+
+    });
+
+};
