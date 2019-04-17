@@ -20,11 +20,14 @@ ui.start('#firebaseui-auth-container', {
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID
     ]
     // Other config options...
 });
+
+
+
+
+
 
 var uiConfig = {
     callbacks: {
@@ -46,11 +49,7 @@ var uiConfig = {
     signInOptions: [
       // Leave the lines as is for the providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      firebase.auth.PhoneAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
     tosUrl: '<your-tos-url>',
@@ -60,31 +59,62 @@ var uiConfig = {
 
 
 
+  var user = firebase.auth().currentUser;
 
-
-// CHAT
-  function login() {
-    // Log the user in via Twitter
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).catch(function(error) {
-      console.log("Error authenticating user:", error);
+  if (user != null) {
+    user.providerData.forEach(function (profile) {
+      console.log("Sign-in provider: " + profile.providerId);
+      console.log("  Provider-specific UID: " + profile.uid);
+      console.log("  Name: " + profile.displayName);
+      console.log("  Email: " + profile.email);
+      console.log("  Photo URL: " + profile.photoURL);
     });
   }
 
-  firebase.auth().onAuthStateChanged(function(user) {
-    // Once authenticated, instantiate Firechat with the logged in user
-    if (user) {
-      initChat(user);
-    }
+
+  // firebase.auth().onAuthStateChanged(function(user) {
+  //   if (user) {
+  //     // User is signed in.
+  //     var displayName = user.displayName;
+  //     var email = user.email;
+  //     var emailVerified = user.emailVerified;
+  //     var photoURL = user.photoURL;
+  //     var isAnonymous = user.isAnonymous;
+  //     var uid = user.uid;
+  //     var providerData = user.providerData;
+  //     // ...
+  //   } else {
+  //     // User is signed out.
+  //     // ...
+  //   }
+  // });
+
+
+
+
+// CHAT
+function login() {
+  // Log the user in via Twitter
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).catch(function(error) {
+    console.log("Error authenticating user:", error);
   });
+}
 
-  function initChat(user) {
-    // Get a Firebase Database ref
-    var chatRef = firebase.database().ref("chat");
-
-    // Create a Firechat instance
-    var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
-
-    // Set the Firechat user
-    chat.setUser(user.uid, user.displayName);
+firebase.auth().onAuthStateChanged(function(user) {
+  // Once authenticated, instantiate Firechat with the logged in user
+  if (user) {
+    initChat(user);
   }
+});
+
+function initChat(user) {
+  // Get a Firebase Database ref
+  var chatRef = firebase.database().ref("chat");
+
+  // Create a Firechat instance
+  var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+
+  // Set the Firechat user
+  chat.setUser(user.uid, user.displayName);
+}
