@@ -15,31 +15,18 @@ firebase.initializeApp(config);
 
 
 
-
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-
 var uiConfig = {
-  callbacks: {
-    signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-      // User successfully signed in.
-      // Return type determines whether we continue the redirect automatically
-      // or whether we leave that to developer to handle.
-      return true;
-    },
-    uiShown: function () {
-      // The widget is rendered.
-      // Hide the loader.
-      document.getElementById('loader').style.display = 'none';
-    }
-  },
+
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: 'popup',
   signInSuccessUrl: 'https://tpgaviria.github.io/MeetUpApp/',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: false
+    }
   ],
   // Terms of service url.
   tosUrl: '<your-tos-url>',
@@ -48,7 +35,55 @@ var uiConfig = {
 };
 
 
+
+
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
+
+
+initApp = function () {
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // User is signed in.
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var photoURL = user.photoURL;
+      var uid = user.uid;
+      var phoneNumber = user.phoneNumber;
+      var providerData = user.providerData;
+      user.getIdToken().then(function (accessToken) {
+        document.getElementById('sign-in-status').textContent = 'Signed in';
+        document.getElementById('sign-in').textContent = 'Sign out';
+        document.getElementById('account-details').textContent = JSON.stringify({
+          displayName: displayName,
+          email: email,
+          emailVerified: emailVerified,
+          phoneNumber: phoneNumber,
+          photoURL: photoURL,
+          uid: uid,
+          accessToken: accessToken,
+          providerData: providerData
+        }, null, '  ');
+      });
+    } else {
+      // User is signed out.
+      document.getElementById('sign-in-status').textContent = 'Signed out';
+      document.getElementById('sign-in').textContent = 'Sign in';
+      document.getElementById('account-details').textContent = 'null';
+    }
+  }, function (error) {
+    console.log(error);
+  });
+};
+
+window.addEventListener('load', function () {
+  initApp()
+});
+
 
 
 
@@ -105,29 +140,29 @@ else {
 };
 
 
-    // CHAT
-    // function login() {
-    //   // Log the user in via google
-    //   var provider = new firebase.auth.GoogleAuthProvider();
-    //   firebase.auth().signInWithPopup(provider).catch(function (error) {
-    //     console.log("Error authenticating user:", error);
-    //   });
-    // }
+// CHAT
+// function login() {
+//   // Log the user in via google
+//   var provider = new firebase.auth.GoogleAuthProvider();
+//   firebase.auth().signInWithPopup(provider).catch(function (error) {
+//     console.log("Error authenticating user:", error);
+//   });
+// }
 
-    firebase.auth().onAuthStateChanged(function (user) {
-      // Once authenticated, instantiate Firechat with the logged in user
-      if (user) {
-        initChat(user);
-      }
-    });
+firebase.auth().onAuthStateChanged(function (user) {
+  // Once authenticated, instantiate Firechat with the logged in user
+  if (user) {
+    initChat(user);
+  }
+});
 
-    function initChat(user) {
-      // Get a Firebase Database ref
-      var chatRef = firebase.database().ref("chat");
+function initChat(user) {
+  // Get a Firebase Database ref
+  var chatRef = firebase.database().ref("chat");
 
-      // Create a Firechat instance
-      var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+  // Create a Firechat instance
+  var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
 
-      // Set the Firechat user
-      chat.setUser(user.uid, user.displayName);
-    }
+  // Set the Firechat user
+  chat.setUser(user.uid, user.displayName);
+}
