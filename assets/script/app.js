@@ -40,6 +40,12 @@ function addressSearch() {
     useDeviceLocation: true
   });
 
+  placeSearch({
+    key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
+    container: document.querySelector('.place-search-input2'),
+    useDeviceLocation: true
+  });
+
   var geocodingKey = 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM'
   var location1 = $('#location1').val();
   var location2 = $('#location2').val();
