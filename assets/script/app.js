@@ -98,10 +98,3 @@ $('.side-panel').append('<p>' + results + '</p>');
 
 
 
-function middlePoint() {
-
-
-
-
-
-}
