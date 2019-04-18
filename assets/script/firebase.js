@@ -84,6 +84,17 @@ var uiConfig = {
       $('#greeting').text('Hey, ' + name + '!');
       $('#no-user').hide();
       $('#signed-in').show();
+
+      $('#sign-out').on('click', firebase.auth().signOut().then(function() {
+
+        $('#no-user').show();
+        $('#signed-in').hide();
+        // Sign-out successful.
+      }).catch(function(error) {
+        // An error happened.
+      });)
+
+
       // User is signed in.
     } else {
       // No user is signed in.
