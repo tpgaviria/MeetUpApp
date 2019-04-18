@@ -19,8 +19,30 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
 });
 
+
 let midPointLat = 0;
 let midPointLong = 0;
+
+
+
+// map search
+
+$('button').on('click', function () {
+
+  event.preventDefault();
+  addressSearch();
+})
+
+window.onload = function () {
+  placeSearch({
+    key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
+    container: document.querySelector('.place-search-input'),
+    useDeviceLocation: true
+
+  });
+};
+
+
 
 function addressSearch() {
 
@@ -140,31 +162,11 @@ function addressSearch() {
   })
 }
 
-
-// map search
-
-$('button').on('click', function () {
-
-  event.preventDefault();
-  addressSearch();
-})
-
-//window.onload = function () {
-
-//   placeSearch({
-//     key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-//     container: document.querySelector('.place-search-input'),
-//     useDeviceLocation: true
-//   });
-
-// };
-
-
 function displayPlaces() {
 
   var places = $(this).attr("data-name");
   //var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?text=del&latitude=37.786882&longitude=-122.399972";
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/search?latitude=" + midPointLat + "&longitude=" + midPointLong;
+  var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=" + midPointLat + "&longitude=" + midPointLong;
 
   $.ajax({
     url: queryURL,
@@ -177,23 +179,70 @@ function displayPlaces() {
       console.log("hi this is me");
       $(".side-panel").empty();
 
+      for (i = 0; i < 9; i++) {
+        
+        var newResult = $("<div>");
+        console.log(newResult);
+        var name = response.businesses[i].name;
+        console.log(name);
+        var categories = response.businesses[i].categories[0].title;
+        console.log(categories);
+        var address = response.businesses[i].location.display_address;
+        console.log(address);
+        var display_phone = response.businesses[i].display_phone;
+        console.log(display_phone);
+        var price = response.businesses[i].location.price;
+        var myStars;
+      
+        if (rating === 5){
+          // <img src="" value=>
+        myStars = $("<img>").attr('src', "assets/images/small_5@2x.png")
+        }
+        
+        else if (rating === 4){
+          myStars = $("<img>").attr('src', "assets/images/small_4@2x.png")
+        }
+        
+        else if(rating === 3){
+          myStars=$("<img>").attr('src', "assets/images/small_3@2x.png")
+        }
+        else if(rating === 2){
+          myStars=$("<img>").attr('src', "assets/images/small_2@2x.png")
+        }
+        else if(rating === 1){
+          myStars=$("<img>").attr('src', "assets/images/small_1@2x.png")
+        }
+        }
 
-      var name = response.name;
-      var pOne = $("<h3></h3>").text(name);
-      side - panel.append(pOne);
-      var address = response.Address;
-      var pTwo = $("<p>").text(address, address1, address2);
-      side - panel.append(pTwo);
-      var categories = response.Categories;
-      var pThree = $("<p>").text(categories);
-      side - panel.append(pThree);
-      var reviews = response.Reviews;
-      var pFour = $("<p>").text(reviews);
-      side - panel.append(pFour);
-      var img_uRL = response.Image;
-      var image = $("<img>").attr("src", imgURL);
-      side - panel.append(image);
+        // ${myStars}
 
+        var rating = response.businesses[i].location.rating;
+        var review_count = response.businesses[i].location.review_count;
+        var image_url = $('<img>').response.businesses[i].image_url;
+        //var image = $("<img>").attr("src", imgURL);
+
+        // var streetAddress = response.businesses[i].location.display_address[0];
+        // var cityAddress = response.businesses[i].location.display_address[1];
+        // var address = response.businesses[i].location.display_address;
+       
+
+        // var reviews = response.Reviews;
+        // var pFour = $("<p>").text(reviews);
+        // side - panel.append(pFour);
+        // var img_uRL = response.Image;
+        // var image = $("<img>").attr("src", imgURL);
+        // side - panel.append(image);
+
+        $(newResult).append("src",image_url);
+        // $(newResult).append(categories)('<br></br>');
+        // $(newResult).append(address)('<br></br>');
+        // $(newResult).append(display_phone)('<br></br>');
+        // $(newResult).append(price)('<br></br>');
+        // $(newResult).append(rating)('<br></br>');
+        // $(newResult).append(review_count)('<br></br>');
+
+    
+      $('.side-panel').prepend(newResult);
     });
 
 };
