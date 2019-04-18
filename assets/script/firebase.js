@@ -92,77 +92,78 @@ window.addEventListener('load', function () {
 // if user signed in, change nav bar
 var user = firebase.auth().currentUser;
 
-if (user) {
-  var name;
-
-  user.providerData.forEach(function (profile) {
-    console.log("Sign-in provider: " + profile.providerId);
-    console.log("  Provider-specific UID: " + profile.uid);
-    console.log("  Name: " + profile.displayName);
-    console.log("  Email: " + profile.email);
-    console.log("  Photo URL: " + profile.photoURL);
-
-    name = profile.displayName;
-    profile = profile;
-    console.log(profile);
-
-  });
-
-
-  $('#greeting').text('Hey, ' + name + '!');
-  $('#no-user').hide();
-  $('#signed-in').show();
-
-
-  $('#sign-out').on('click', function () {
-
-    firebase.auth().signOut().then(function () {
-
-      $('#no-user').show();
-      $('#signed-in').hide();
-
-      console.log('signed out succesfully');
-      // Sign-out successful.
-    }).catch(function (error) {
-      // An error happened.
-      console.log('error signing out');
-
-    })
-  })
-}
-
-// User is signed in.
-else {
-  // No user is signed in.
-  console.log('no user signed in');
-  $('#no-user').show();
-  $('#signed-in').hide();
-};
-
-
-// CHAT
-function login() {
-  // Log the user in via google
-  var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).catch(function (error) {
-    console.log("Error authenticating user:", error);
-  });
-}
-
 firebase.auth().onAuthStateChanged(function (user) {
   // Once authenticated, instantiate Firechat with the logged in user
   if (user) {
-    initChat(user);
+    var name;
+
+    user.providerData.forEach(function (profile) {
+      console.log("Sign-in provider: " + profile.providerId);
+      console.log("  Provider-specific UID: " + profile.uid);
+      console.log("  Name: " + profile.displayName);
+      console.log("  Email: " + profile.email);
+      console.log("  Photo URL: " + profile.photoURL);
+
+      name = profile.displayName;
+      profile = profile;
+      console.log(profile);
+
+
+
+      $('#greeting').text('Hey, ' + name + '!');
+      $('#no-user').hide();
+      $('#signed-in').show();
+
+
+      $('#sign-out').on('click', function () {
+
+        firebase.auth().signOut().then(function () {
+
+          $('#no-user').show();
+          $('#signed-in').hide();
+
+          console.log('signed out succesfully');
+          // Sign-out successful.
+        }).catch(function (error) {
+          // An error happened.
+          console.log('error signing out');
+
+        })
+      })
+    })
   }
-});
+  // User is signed in.
+  else {
+    // No user is signed in.
+    console.log('no user signed in');
+    $('#no-user').show();
+    $('#signed-in').hide();
+  };
 
-function initChat(user) {
-  // Get a Firebase Database ref
-  var chatRef = firebase.database().ref("chat");
 
-  // Create a Firechat instance
-  var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+  // CHAT
+  function login() {
+    // Log the user in via google
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).catch(function (error) {
+      console.log("Error authenticating user:", error);
+    });
+  }
 
-  // Set the Firechat user
-  chat.setUser(user.uid, user.displayName);
-}
+  firebase.auth().onAuthStateChanged(function (user) {
+    // Once authenticated, instantiate Firechat with the logged in user
+    if (user) {
+      initChat(user);
+    }
+  });
+
+  function initChat(user) {
+    // Get a Firebase Database ref
+    var chatRef = firebase.database().ref("chat");
+
+    // Create a Firechat instance
+    var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+
+    // Set the Firechat user
+    chat.setUser(user.uid, user.displayName);
+  }
