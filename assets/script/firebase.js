@@ -37,48 +37,47 @@ var uiConfig = {
         if (user) {
           var user = firebase.auth().currentUser;
           var name;
-          if (user != null) {
+          if (user) {
             user.providerData.forEach(function (profile) {
               console.log("Sign-in provider: " + profile.providerId);
               console.log("  Provider-specific UID: " + profile.uid);
               console.log("  Name: " + profile.displayName);
               console.log("  Email: " + profile.email);
               console.log("  Photo URL: " + profile.photoURL);
-      
+
               name = profile.displayName;
               profile = profile;
               console.log(profile);
-      
-              $('#greeting').text('Hey, ' + name + '!');
-              $('#no-user').hide();
-              $('#signed-in').show();
+
             });
-      
+
           }
-      
-      
+
+          
+          
+          
           $('#sign-out').on('click', function () {
-      
+            
             firebase.auth().signOut().then(function () {
-      
+              
               $('#no-user').show();
               $('#signed-in').hide();
-      
+              
               console.log('signed out succesfully');
               // Sign-out successful.
             }).catch(function (error) {
               // An error happened.
               console.log('error signing out');
-      
+              
             })
           })
-      
-      
-      
+          
+          
+          
           // User is signed in.
         } else {
           // No user is signed in.
-      
+          
           console.log('no user signed in');
         }
       });
@@ -111,21 +110,35 @@ var uiConfig = {
 
 
 
+var user = firebase.auth().currentUser;
+
+if (user) {
+  $('#greeting').text('Hey, ' + name + '!');
+  $('#no-user').hide();
+  $('#signed-in').show();
+  // User is signed in.
+} else {
+  // No user is signed in.
+  $('#no-user').show();
+  $('#signed-in').hide();
+}
+
+
 
 // firebase.auth().onAuthStateChanged(function (user) {
-//   if (user) {
+  //   if (user) {
 //     var user = firebase.auth().currentUser;
 //     var name;
 //     if (user != null) {
-//       user.providerData.forEach(function (profile) {
-//         console.log("Sign-in provider: " + profile.providerId);
-//         console.log("  Provider-specific UID: " + profile.uid);
-//         console.log("  Name: " + profile.displayName);
-//         console.log("  Email: " + profile.email);
-//         console.log("  Photo URL: " + profile.photoURL);
-
-//         name = profile.displayName;
-//         profile = profile;
+  //       user.providerData.forEach(function (profile) {
+    //         console.log("Sign-in provider: " + profile.providerId);
+    //         console.log("  Provider-specific UID: " + profile.uid);
+    //         console.log("  Name: " + profile.displayName);
+    //         console.log("  Email: " + profile.email);
+    //         console.log("  Photo URL: " + profile.photoURL);
+    
+    //         name = profile.displayName;
+    //         profile = profile;
 //         console.log(profile);
 
 //       });
