@@ -49,13 +49,13 @@ var uiConfig = {
               profile = profile;
               console.log(profile);
       
+              $('#greeting').text('Hey, ' + name + '!');
+              $('#no-user').hide();
+              $('#signed-in').show();
             });
       
           }
       
-          $('#greeting').text('Hey, ' + name + '!');
-          $('#no-user').hide();
-          $('#signed-in').show();
       
           $('#sign-out').on('click', function () {
       
