@@ -75,23 +75,23 @@ function addressSearch() {
     var loc1lat = loc1results.latLng.lat;
     var loc1lng = loc1results.latLng.lng;
     var loc1coords = loc1lat + ', ' + loc1lng;
-    
+
     console.log(loc1lat);
 
 
     var loc2lat = loc2results.latLng.lat;
     var loc2lng = loc2results.latLng.lng;
     var loc2coords = loc2lat + ', ' + loc2lng;
-    
+
     console.log('location type: ' + loc1type + ', ' + loc1coords);
     console.log(loc2coords);
 
-    
+
   })
 
 
-$('.side-panel').append(location1 + location2);
-$('.side-panel').append('<p>' + results + '</p>');
+  $('.side-panel').append(location1 + location2);
+  $('.side-panel').append('<p>' + results + '</p>');
 
 
 }
