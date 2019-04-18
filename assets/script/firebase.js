@@ -22,9 +22,6 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-
-
-
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
@@ -51,206 +48,61 @@ var uiConfig = {
 };
 
 
-
 ui.start('#firebaseui-auth-container', uiConfig);
 
 
 
 
 
-
-
+// if user signed in, change nav bar
 var user = firebase.auth().currentUser;
 
 if (user) {
+  var name;
+
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+
+    name = profile.displayName;
+    profile = profile;
+    console.log(profile);
+
+  });
+
+
   $('#greeting').text('Hey, ' + name + '!');
   $('#no-user').hide();
   $('#signed-in').show();
 
 
+  $('#sign-out').on('click', function () {
 
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      var user = firebase.auth().currentUser;
-      var name;
-      if (user) {
-        user.providerData.forEach(function (profile) {
-          console.log("Sign-in provider: " + profile.providerId);
-          console.log("  Provider-specific UID: " + profile.uid);
-          console.log("  Name: " + profile.displayName);
-          console.log("  Email: " + profile.email);
-          console.log("  Photo URL: " + profile.photoURL);
+    firebase.auth().signOut().then(function () {
 
-          name = profile.displayName;
-          profile = profile;
-          console.log(profile);
+      $('#no-user').show();
+      $('#signed-in').hide();
 
-        });
+      console.log('signed out succesfully');
+      // Sign-out successful.
+    }).catch(function (error) {
+      // An error happened.
+      console.log('error signing out');
 
-      }
-
-
-
-
-      $('#sign-out').on('click', function () {
-
-        firebase.auth().signOut().then(function () {
-
-          $('#no-user').show();
-          $('#signed-in').hide();
-
-          console.log('signed out succesfully');
-          // Sign-out successful.
-        }).catch(function (error) {
-          // An error happened.
-          console.log('error signing out');
-
-        })
-      })
-
-
-
-      // User is signed in.
-    } else {
-      // No user is signed in.
-
-      console.log('no user signed in');
-    }
-  });
-
-
-
-  // User is signed in.
-} else {
-  // No user is signed in.
-  $('#no-user').show();
-  $('#signed-in').hide();
+    })
+  })
 }
 
-
-
-
-
-
-
-
-
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    var user = firebase.auth().currentUser;
-    name = null;
-    if (user) {
-      user.providerData.forEach(function (profile) {
-        console.log("Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
-
-        name = profile.displayName;
-        profile = profile;
-        console.log(profile);
-
-
-        $('#sign-out').on('click', function () {
-
-          firebase.auth().signOut().then(function () {
-
-            $('#no-user').show();
-            $('#signed-in').hide();
-
-            console.log('signed out succesfully');
-            // Sign-out successful.
-          }).catch(function (error) {
-            // An error happened.
-            console.log('error signing out');
-
-          })
-        })
-
-
-
-      });
-
-    }
-
-
-
-
-
-
-
-
-    // firebase.auth().onAuthStateChanged(function (user) {
-    //   if (user) {
-    //     var user = firebase.auth().currentUser;
-    //     var name;
-    //     if (user != null) {
-    //       user.providerData.forEach(function (profile) {
-    //         console.log("Sign-in provider: " + profile.providerId);
-    //         console.log("  Provider-specific UID: " + profile.uid);
-    //         console.log("  Name: " + profile.displayName);
-    //         console.log("  Email: " + profile.email);
-    //         console.log("  Photo URL: " + profile.photoURL);
-
-    //         name = profile.displayName;
-    //         profile = profile;
-    //         console.log(profile);
-
-    //       });
-
-    //     }
-
-    //     $('#greeting').text('Hey, ' + name + '!');
-    //     $('#no-user').hide();
-    //     $('#signed-in').show();
-
-    //     $('#sign-out').on('click', function () {
-
-    //       firebase.auth().signOut().then(function () {
-
-    //         $('#no-user').show();
-    //         $('#signed-in').hide();
-
-    //         console.log('signed out succesfully');
-    //         // Sign-out successful.
-    //       }).catch(function (error) {
-    //         // An error happened.
-    //         console.log('error signing out');
-
-    //       })
-    //     })
-
-
-
-    //     // User is signed in.
-    //   } else {
-    //     // No user is signed in.
-
-    //     console.log('no user signed in');
-    //   }
-    // });
-
-
-
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     // User is signed in.
-    //     var displayName = user.displayName;
-    //     var email = user.email;
-    //     var emailVerified = user.emailVerified;
-    //     var photoURL = user.photoURL;
-    //     var isAnonymous = user.isAnonymous;
-    //     var uid = user.uid;
-    //     var providerData = user.providerData;
-    //     // ...
-    //   } else {
-    //     // User is signed out.
-    //     // ...
-    //   }
-    // });
-
-
+// User is signed in.
+else {
+  // No user is signed in.
+  console.log('no user signed in');
+  $('#no-user').show();
+  $('#signed-in').hide();
+};
 
 
     // CHAT
