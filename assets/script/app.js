@@ -170,7 +170,7 @@ function displayPlaces() {
 
   $.ajax({
     url: queryURL,
-    headers: { 'Authorization': 'Bearer cTXs93Tu7cOPhOYuXLLZdE5SIIkZRBS19EXdpPFQ3kBP7QyfYF3Uwbk6ZzwygDmXzdFKv0g8ndmZecAPAdKKOm3aeqFhD_wrH2DP6vmneVo0nRIO90SbPc-hjZKuXHYx' },
+    headers: { 'Authorization': 'Bearer cTXs93Tu7cOPhOYuXLLZdE5SIIkZRBS19EXdpPFQ3kBP7QyfYF3Uwbk6ZzwygDmXzdFKv0g8ndmZecAPAdKKOm3aeqFhD_wrH2DP6vmneVo0nRIO90SbPc-hjZKuXHYx'},
     method: "GET",
     dataType: 'json',
   })
@@ -200,7 +200,7 @@ function displayPlaces() {
         var review_count = response.businesses[i].review_count;
         // console.log(review_count);
         var image_url = response.businesses[i].image_url;
-        var myImage = $('<img>').attr('src', image_url);
+        // var myImage = $('<img>').attr('src', image_url);
         console.log(image_url);
         
 
@@ -249,7 +249,7 @@ function displayPlaces() {
         var newResult = $("<div>").html(
           "<h3>" + name + "</h3> <br>" +
           myImage +
-          "<h4 class='cat'>" + categories + "</h4> <img src='"+ image_url + "'/>" +
+          "<h4 class='cat'>" + categories + "</h4> <img class='pic' src='"+ image_url + "'/>" +
           "<h4>" + address + "</h4>" +
           "<h4>" + display_phone + "</h4>" +
           "<h4>" + price + "</h4>" +
