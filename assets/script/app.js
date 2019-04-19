@@ -179,7 +179,7 @@ function displayPlaces() {
       console.log("hi this is me");
       $(".side-panel").empty();
 
-      for (i = 0; i < 9; i++) {
+      for (var i = 0; i < 9; i++) {
         
         var newResult = $("<div>");
         var name = response.businesses[i].name;
@@ -193,6 +193,7 @@ function displayPlaces() {
         var price = response.businesses[i].location.price;
         var myStars;
         console.log(newResult);
+
         
         if (rating === 5){
           // <img src="" value=>
