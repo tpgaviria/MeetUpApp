@@ -164,7 +164,7 @@ function addressSearch() {
 
 function displayPlaces() {
 
-  var places = $(this).attr("data-name");
+  // var places = $(this).attr("data-name");
   //var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?text=del&latitude=37.786882&longitude=-122.399972";
   var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=" + midPointLat + "&longitude=" + midPointLong;
 
@@ -248,7 +248,6 @@ function displayPlaces() {
 
         var newResult = $("<div>").html(
           "<h3>" + name + "</h3> <br>" +
-          myImage +
           "<h4 class='cat'>" + categories + "</h4> <img class='pic' src='"+ image_url + "'/>" +
           "<h4>" + address + "</h4>" +
           "<h4>" + display_phone + "</h4>" +
