@@ -300,6 +300,6 @@ function displayRouteInfo(startingPointAddr,endingPointAddr) {
 displayRouteInfo();
 displayPlaces();
 
-var polyline = L.polyline(routeVectorLatLngArray, {color: 'red'}).addTo(map);
-// zoom the map to the polyline
-map.fitBounds(polyline.getBounds());
+// var polyline = L.polyline(routeVectorLatLngArray, {color: 'red'}).addTo(map);
+// // zoom the map to the polyline
+// map.fitBounds(polyline.getBounds());
