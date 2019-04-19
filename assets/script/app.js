@@ -17,13 +17,6 @@ $('button').on('click', function () {
   addressSearch();
 })
 
-// window.onload = function () {
-//   placeSearch({
-//     key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-//     container: document.querySelector('.place-search-input'),
-//     useDeviceLocation: true
-//   });
-// };
 
 let routeVectorLatLngArray = [];
 
@@ -144,11 +137,9 @@ function renderPoint(latLngArray) {
   let marker = L.marker(latLngArray).addTo(mymap);
 }
 
-
 function displayPlaces() {
 
   let places = $(this).attr("data-name");
-
   let midPointLatitude = 0;
   let midPointLongitude = 0;
 
@@ -243,6 +234,16 @@ function displayPlaces() {
   });
 };
 
+        var newResult = $("<div>").html(
+          "<h3>" + name + "</h3> " +
+          "</h4> <img class='picture' src='"+ image_url + "'/>" +
+          "<h5 class='cat'>" + categories + 
+          "<h6>" + address + "</h6>" +
+          "<h6>" + display_phone + "</h6>" +
+          "<h6>" + price + "</h6>" +
+          "<h6>" + rating + "</h6> <img class='rate' src='"+ myStars + "'/>" +
+          "<h6> Reviews: " + review_count + "</h6>"
+        );
 
 
 // function to draw the route from a starting point to the selected endpoint from the yelp results
