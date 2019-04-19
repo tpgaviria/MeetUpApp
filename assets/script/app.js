@@ -137,11 +137,9 @@ function renderPoint(latLngArray) {
   let marker = L.marker(latLngArray).addTo(mymap);
 }
 
-
 function displayPlaces() {
 
   let places = $(this).attr("data-name");
-
   let midPointLatitude = 0;
   let midPointLongitude = 0;
 
