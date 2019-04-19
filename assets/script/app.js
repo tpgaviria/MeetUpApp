@@ -17,14 +17,6 @@ $('button').on('click', function () {
   addressSearch();
 })
 
-// window.onload = function () {
-//   placeSearch({
-//     key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-//     container: document.querySelector('.place-search-input'),
-//     useDeviceLocation: true
-//   });
-// };
-
 let routeVectorLatLngArray = [];
 
 function addressSearch() {
@@ -141,7 +133,7 @@ function findMidPoint(latLngRadsArray1, latLngRadsArray2) {
 // function to render a point on the map
 // latLngArray should be in the form of [51.5, -0.09]
 function renderPoint(latLngArray) {
-  let marker = L.marker(latLngArray).addTo(mymap);
+  let marker = L.marker(latLngArray).addTo(map);
 }
 
 
@@ -248,7 +240,7 @@ function displayPlaces() {
 // function to draw the route from a starting point to the selected endpoint from the yelp results
 // pass the single line addresses for the starting and ending loations as arguments
 // startingPointAddr,endingPointAddr
-function displayRouteInfo(startingPointAddr,endingPointAddr) {
+function displayRouteInfo() {
 
   let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
   // let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + startingPointAddr + '&to=' + endingPointAddr;
