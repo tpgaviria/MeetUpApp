@@ -114,8 +114,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
     $('#greeting').text('Hey, ' + name + '!');
-    $('#no-user').hide();
-    $('#signed-in').show();
+    // $('#no-user').hide();
+    // $('#signed-in').show();
 
 
 
