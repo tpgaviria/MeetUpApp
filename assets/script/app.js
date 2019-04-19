@@ -182,7 +182,6 @@ function renderPoint(latLngArray) {
   function renderPoint(latLngArray) {
     let marker = L.marker(latLngArray).addTo(mymap);
   }
-  displayPlaces();
 }
 
 function displayPlaces() {
@@ -280,3 +279,5 @@ function displayPlaces() {
       }
     });
 };
+
+displayPlaces();
