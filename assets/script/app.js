@@ -26,21 +26,11 @@ let midPointLong = 0;
 
 
 // map search
-
 $('button').on('click', function () {
 
   event.preventDefault();
   addressSearch();
 })
-
-// window.onload = function () {
-//   placeSearch({
-//     key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-//     container: document.querySelector('.place-search-input'),
-//     useDeviceLocation: true
-
-//   });
-// };
 
 
 
@@ -60,16 +50,11 @@ function addressSearch() {
   $.ajax({
     url: geocodingURL
   }).done(function (response) {
-    // console.log(response);
-    // console.log(response.results);
-    // console.log(response.results[0].locations[0].latLng.lat);
-    // console.log(response.results[0].locations[0].latLng.lng);
-    // console.log(response.results[1].locations);
+
 
     var loc1results = response.results[0].locations[0];
     var loc2results = response.results[1].locations[0];
 
-    // console.log(loc1results);
 
     var loc1type = loc1results.geocodeQuality;
     var loc1lat = loc1results.latLng.lat;
@@ -170,7 +155,7 @@ function displayPlaces() {
 
   $.ajax({
     url: queryURL,
-    headers: { 'Authorization': 'Bearer cTXs93Tu7cOPhOYuXLLZdE5SIIkZRBS19EXdpPFQ3kBP7QyfYF3Uwbk6ZzwygDmXzdFKv0g8ndmZecAPAdKKOm3aeqFhD_wrH2DP6vmneVo0nRIO90SbPc-hjZKuXHYx'},
+    headers: { 'Authorization': 'Bearer cTXs93Tu7cOPhOYuXLLZdE5SIIkZRBS19EXdpPFQ3kBP7QyfYF3Uwbk6ZzwygDmXzdFKv0g8ndmZecAPAdKKOm3aeqFhD_wrH2DP6vmneVo0nRIO90SbPc-hjZKuXHYx' },
     method: "GET",
     dataType: 'json',
   })
@@ -179,10 +164,9 @@ function displayPlaces() {
       console.log("hi this is me");
       $(".side-panel").empty();
 
-      
+
 
       for (var i = 0; i <= 9; i++) {
-
 
         // console.log(newResult);
         var name = response.businesses[i].name;
@@ -201,18 +185,18 @@ function displayPlaces() {
         // console.log(review_count);
         var image_url = response.businesses[i].image_url;
         // var myImage = $('<img>').attr('src', image_url);
-        console.log(image_url);
-        
 
 
-        
+
+
+
         var myStars;
 
         if (rating === 5) {
           // <img src="" value=>
           myStars = "/assets/images/small_5@2x.png";
         }
-        else if(rating === 4.5){
+        else if (rating === 4.5) {
           myStars = "/assets/images/small_4_half@2x.png";
         }
 
@@ -222,7 +206,7 @@ function displayPlaces() {
         else if (rating === 3.5) {
           myStars = "/assets/images/small_3_half@2x.png";
         }
-        
+
 
         else if (rating === 3) {
           myStars = "/assets/images/small_3@2x.png";
@@ -233,7 +217,7 @@ function displayPlaces() {
         else if (rating === 2) {
           myStars = "/assets/images/small_2@2x.png";
         }
-        else if (rating === 1.5){
+        else if (rating === 1.5) {
           myStars = "/assets/images/small_1_half@2x.png";
         }
         else if (rating === 1) {
@@ -242,27 +226,40 @@ function displayPlaces() {
           myStars = "";
         }
 
-        console.log("hey I am here",myStars);
-        
 
 
-        var newResult = $("<div>").html(
-          "<h3>" + name + "</h3> <br>" +
-          "<h4 class='cat'>" + categories + "</h4> <img class='pic' src='"+ image_url + "'/>" +
+        var newResult = $("<div data-attr='" + i + "'>").html(
+          "<img class='pic' src='" + image_url + "'/>" +
+          "<h3>" + (i + 1) + ". " + name + "</h3>" +
+          "<h4 class='cat'>" + categories + "</h4>" +
           "<h4>" + address + "</h4>" +
           "<h4>" + display_phone + "</h4>" +
           "<h4>" + price + "</h4>" +
-          "<h4>" + rating + "</h4> <img src='"+ myStars + "'/>" +
-          "<h4> Reviews: " + review_count + "</h4>"
-        );
+          "<h4>" + rating + "</h4> <img src='" + myStars + "'/>" +
+          "<h4> Reviews: " + review_count + "</h4>")
 
 
-        // $('.side-panel').prepend(newResult);
-        console.log("new ", newResult);
+
+        newResult.on('click', meetAddress);
+
+
+
         $('.side-panel').append(newResult);
 
+
+
+        function meetAddress(event) {
+
+          j = $(this).attr('data-attr');
+          console.log(j);
+
+          meetPlace = response.businesses[j].location.display_address[0] + ', ' + response.businesses[j].location.display_address[1];
+          console.log(meetPlace);
+
+        }
       }
-
     });
-
 };
+
+
+let meetPlace = null;
