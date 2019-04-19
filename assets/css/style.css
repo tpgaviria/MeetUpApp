@@ -58,6 +58,7 @@ form {
   }
 
   .side-panel{
+<<<<<<< HEAD
     height: 500px;
     overflow-y: auto;
 }
@@ -74,3 +75,15 @@ h3 {
 h4 {
     font-size: 12px;
 }
+=======
+      height: 500px;
+      overflow-y: auto;
+  }
+  .pic{
+      height: 200px;
+      width: 200px;
+  }
+  .cat{
+      
+  }
+>>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
