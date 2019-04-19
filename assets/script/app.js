@@ -159,7 +159,7 @@ function addressSearch() {
       var marker = L.marker(latLngArray).addTo(mymap);
     }
     displayPlaces();
-  })
+  });
 }
 
 function displayPlaces() {
@@ -179,70 +179,117 @@ function displayPlaces() {
       console.log("hi this is me");
       $(".side-panel").empty();
 
-      for (i = 0; i < 9; i++) {
-        
-        var newResult = $("<div>");
-        console.log(newResult);
-        var name = response.businesses[i].name;
-        console.log(name);
-        var categories = response.businesses[i].categories[0].title;
-        console.log(categories);
-        var address = response.businesses[i].location.display_address;
-        console.log(address);
-        var display_phone = response.businesses[i].display_phone;
-        console.log(display_phone);
-        var price = response.businesses[i].location.price;
-        var myStars;
       
-        if (rating === 5){
+
+      for (i = 0; i <= 9; i++) {
+
+
+        // console.log(newResult);
+        var name = response.businesses[i].name;
+        // console.log(name);
+        var categories = response.businesses[i].categories[0].title;
+        // console.log(categories);
+        var address = response.businesses[i].location.display_address;
+        // console.log(address);
+        var display_phone = response.businesses[i].display_phone;
+        // console.log(display_phone);
+        var price = response.businesses[i].price;
+        // console.log(price);
+        var rating = response.businesses[i].rating;
+        // console.log(rating);
+        var review_count = response.businesses[i].review_count;
+        // console.log(review_count);
+        var image_url = response.businesses[i].image_url;
+        var myImage = $('<img>').attr('src', image_url);
+        console.log(image_url);
+        
+
+
+        
+        var myStars;
+
+        if (rating === 5) {
           // <img src="" value=>
-        myStars = $("<img>").attr('src', "assets/images/small_5@2x.png")
+          myStars =  "/assets/images/small_5@2x.png";
+        }
+        else if(rating === 4.5){
+          myStars = "/assets/images/small_4_half@2x.png""
+        }
+
+        else if (rating === 4) {
+          myStars = "/assets/images/small_3_half@2x.png";
+        }
+        else if (rating === 4) {
+          myStars = "/assets/images/small_3_half@2x.png";
         }
         
-        else if (rating === 4){
-          myStars = $("<img>").attr('src', "assets/images/small_4@2x.png")
+
+        else if (rating === 3) {
+          myStars = "/assets/images/small_3@2x.png";
         }
+        else if (rating === 4) {
+          myStars = "/assets/images/small_3_half@2x.png";
+        }
+        else if (rating === 2) {
+          myStars = "/assets/images/small_2@2x.png";
+        }
+        else if (rating === 4) {
+          myStars = "/assets/images/small_3_half@2x.png";
+        }
+        else if (rating === 1) {
+          myStars = "/assets/images/small_1@2x.png";
+        } else {
+          myStars = "";
+        }
+
+        console.log("hey I am here",myStars);
         
-        else if(rating === 3){
-          myStars=$("<img>").attr('src', "assets/images/small_3@2x.png")
-        }
-        else if(rating === 2){
-          myStars=$("<img>").attr('src', "assets/images/small_2@2x.png")
-        }
-        else if(rating === 1){
-          myStars=$("<img>").attr('src', "assets/images/small_1@2x.png")
-        }
-        }
 
-        // ${myStars}
 
-        var rating = response.businesses[i].location.rating;
-        var review_count = response.businesses[i].location.review_count;
-        var image_url = $('<img>').response.businesses[i].image_url;
-        //var image = $("<img>").attr("src", imgURL);
+        var newResult = $("<div>").html(
+          "<h3>" + name + "</h3> <br>" +
+          myImage +
+          "<h4 class='cat'>" + categories + "</h4> <img src='"+ image_url + "'/>" +
+          "<h4>" + address + "</h4>" +
+          "<h4>" + display_phone + "</h4>" +
+          "<h4>" + price + "</h4>" +
+          "<h4>" + rating + "</h4> <img src='"+ myStars + "'/>" +
+          "<h4> Reviews: " + review_count + "</h4>"
+        );
 
-        // var streetAddress = response.businesses[i].location.display_address[0];
-        // var cityAddress = response.businesses[i].location.display_address[1];
-        // var address = response.businesses[i].location.display_address;
-       
 
-        // var reviews = response.Reviews;
-        // var pFour = $("<p>").text(reviews);
-        // side - panel.append(pFour);
-        // var img_uRL = response.Image;
-        // var image = $("<img>").attr("src", imgURL);
-        // side - panel.append(image);
+        // $('.side-panel').prepend(newResult);
+        console.log("new ", newResult);
+        $('.side-panel').append(newResult);
 
-        $(newResult).append("src",image_url);
-        // $(newResult).append(categories)('<br></br>');
-        // $(newResult).append(address)('<br></br>');
-        // $(newResult).append(display_phone)('<br></br>');
-        // $(newResult).append(price)('<br></br>');
-        // $(newResult).append(rating)('<br></br>');
-        // $(newResult).append(review_count)('<br></br>');
+      }
 
-    
-      $('.side-panel').prepend(newResult);
+      // ${myStars}
+
+      //var image = $("<img>").attr("src", imgURL);
+
+      // var streetAddress = response.businesses[i].location.display_address[0];
+      // var cityAddress = response.businesses[i].location.display_address[1];
+      // var address = response.businesses[i].location.display_address;
+
+
+      // var reviews = response.Reviews;
+      // var pFour = $("<p>").text(reviews);
+      // side - panel.append(pFour);
+      // var img_uRL = response.Image;
+      // var image = $("<img>").attr("src", imgURL);
+      // side - panel.append(image);
+
+
+      // $(newResult).append(categories)('<br></br>');
+      // $(newResult).append(address)('<br></br>');
+      // $(newResult).append(display_phone)('<br></br>');
+      // $(newResult).append(price)('<br></br>');
+      // $(newResult).append(rating)('<br></br>');
+      // $(newResult).append(review_count)('<br></br>');
+
+
+
     });
 
 };

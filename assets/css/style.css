@@ -42,3 +42,8 @@ form {
   .modal-content {
       color: black;
   }
+
+  .side-panel{
+      height: 500px;
+      overflow-y: auto;
+  }
