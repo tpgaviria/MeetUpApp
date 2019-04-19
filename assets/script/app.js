@@ -264,32 +264,6 @@ function displayPlaces() {
 
       }
 
-      // ${myStars}
-
-      //var image = $("<img>").attr("src", imgURL);
-
-      // var streetAddress = response.businesses[i].location.display_address[0];
-      // var cityAddress = response.businesses[i].location.display_address[1];
-      // var address = response.businesses[i].location.display_address;
-
-
-      // var reviews = response.Reviews;
-      // var pFour = $("<p>").text(reviews);
-      // side - panel.append(pFour);
-      // var img_uRL = response.Image;
-      // var image = $("<img>").attr("src", imgURL);
-      // side - panel.append(image);
-
-
-      // $(newResult).append(categories)('<br></br>');
-      // $(newResult).append(address)('<br></br>');
-      // $(newResult).append(display_phone)('<br></br>');
-      // $(newResult).append(price)('<br></br>');
-      // $(newResult).append(rating)('<br></br>');
-      // $(newResult).append(review_count)('<br></br>');
-
-
-
     });
 
 };
