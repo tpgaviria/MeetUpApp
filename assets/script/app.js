@@ -11,36 +11,20 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
 });
 
-<<<<<<< HEAD
 
 let midPointLat = 0;
 let midPointLong = 0;
 
 
 
-=======
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 // map search
 $('button').on('click', function () {
   event.preventDefault();
   addressSearch();
 })
 
-<<<<<<< HEAD
 
 
-function addressSearch() {
-=======
-// window.onload = function () {
-//   placeSearch({
-//     key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-//     container: document.querySelector('.place-search-input'),
-//     useDeviceLocation: true
-//   });
-// };
-
-let routeVectorLatLngArray = [];
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
 function addressSearch() {
 
@@ -53,67 +37,30 @@ function addressSearch() {
   console.log(location1);
   console.log(location2);
   // console.log(geocodingURL);
-<<<<<<< HEAD
-
-=======
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
   $.ajax({
     url: geocodingURL
   }).done(function (response) {
-<<<<<<< HEAD
-
-=======
-    // console.log(response);
-    // console.log(response.results);
-    // console.log(response.results[0].locations[0].latLng.lat);
-    // console.log(response.results[0].locations[0].latLng.lng);
-    // console.log(response.results[1].locations);
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
     let loc1results = response.results[0].locations[0];
     let loc2results = response.results[1].locations[0];
 
-<<<<<<< HEAD
-
-    var loc1type = loc1results.geocodeQuality;
-    var loc1lat = loc1results.latLng.lat;
-    var loc1lng = loc1results.latLng.lng;
-=======
     // console.log(loc1results);
 
     let loc1type = loc1results.geocodeQuality;
     let loc1lat = loc1results.latLng.lat;
     let loc1lng = loc1results.latLng.lng;
     let loc1coords = [loc1lat, loc1lng];
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
     let loc2lat = loc2results.latLng.lat;
     let loc2lng = loc2results.latLng.lng;
     let loc2coords = [loc2lat, loc2lng];
 
-<<<<<<< HEAD
-    var loc1coords = [loc1lat, loc1lng];
-
-    var loc2lat = loc2results.latLng.lat;
-    var loc2lng = loc2results.latLng.lng;
-    var loc2coords = [loc2lat, loc2lng];
-
-
-=======
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
     console.log('location type: ' + loc1type + ', ' + loc1coords);
     console.log(loc2coords);
     $('.side-panel').append('Location 1: ' + location1 + '<br>Coordinates: ' + loc1coords + '<br><br>');
     $('.side-panel').append('Location 2: ' + location2 + '<br>Coordinates: ' + loc2coords);
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
     // converting latLng array values to radians to calculate midpoint
     let loc1CoordsRads = degreesToRadians(loc1coords);
     let loc2CoordsRads = degreesToRadians(loc2coords);
@@ -122,7 +69,6 @@ function addressSearch() {
     // converting midpoint back to degrees
     let midPointInDeg = radiansToDegrees(midpointInRads);
     // ^ midPointInDegrees can be passed as an argument to the yelp API call function.
-<<<<<<< HEAD
     midPointLat = midPointInDeg[0];
     midPointLong = midPointInDeg[1];
 
@@ -201,15 +147,6 @@ function displayPlaces() {
       console.log(response);
       console.log("hi this is me");
       $(".side-panel").empty();
-=======
-
-    console.log(midPointInDeg);
-
-    $('.side-panel').append('Location 1: ' + location1 + '<br>Coordinates: ' + loc1coords + '<br><br>');
-    $('.side-panel').append('Location 2: ' + location2 + '<br>Coordinates: ' + loc2coords);
-  })
-}
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
 // console.log('location 1 radians: ' + loc1CoordsRads);
 // console.log('location 2 radians: ' + loc2CoordsRads);
@@ -224,88 +161,6 @@ function degreesToRadians(latLngArray) {
   return [lanInRads, longInRads];
 }
 
-<<<<<<< HEAD
-
-      for (var i = 0; i <= 9; i++) {
-
-        // console.log(newResult);
-        var name = response.businesses[i].name;
-        // console.log(name);
-        var categories = response.businesses[i].categories[0].title;
-        // console.log(categories);
-        var address = response.businesses[i].location.display_address;
-        // console.log(address);
-        var display_phone = response.businesses[i].display_phone;
-        // console.log(display_phone);
-        var price = response.businesses[i].price;
-        // console.log(price);
-        var rating = response.businesses[i].rating;
-        // console.log(rating);
-        var review_count = response.businesses[i].review_count;
-        // console.log(review_count);
-        var image_url = response.businesses[i].image_url;
-        // var myImage = $('<img>').attr('src', image_url);
-
-
-
-
-
-        var myStars;
-
-        if (rating === 5) {
-          // <img src="" value=>
-          myStars = "/assets/images/small_5@2x.png";
-        }
-        else if (rating === 4.5) {
-          myStars = "/assets/images/small_4_half@2x.png";
-        }
-
-        else if (rating === 4) {
-          myStars = "/assets/images/small_4@2x.png";
-        }
-        else if (rating === 3.5) {
-          myStars = "/assets/images/small_3_half@2x.png";
-        }
-
-
-        else if (rating === 3) {
-          myStars = "/assets/images/small_3@2x.png";
-        }
-        else if (rating === 2.5) {
-          myStars = "/assets/images/small_2_half@2x.png";
-        }
-        else if (rating === 2) {
-          myStars = "/assets/images/small_2@2x.png";
-        }
-        else if (rating === 1.5) {
-          myStars = "/assets/images/small_1_half@2x.png";
-        }
-        else if (rating === 1) {
-          myStars = "/assets/images/small_1@2x.png";
-        } else {
-          myStars = "";
-        }
-
-
-
-        var newResult = $("<div data-attr='" + i + "'>").html(
-          "<img class='pic' src='" + image_url + "'/>" +
-          "<h3>" + (i + 1) + ". " + name + "</h3>" +
-          "<h4 class='cat'>" + categories + "</h4>" +
-          "<h4>" + address + "</h4>" +
-          "<h4>" + display_phone + "</h4>" +
-          "<h4>" + price + "</h4>" +
-          "<h4>" + rating + "</h4> <img src='" + myStars + "'/>" +
-          "<h4> Reviews: " + review_count + "</h4>")
-
-
-
-        newResult.on('click', meetAddress);
-
-
-
-        $('.side-panel').append(newResult);
-=======
 // Inverse of the degreesToRadians function to be called after the midpoint is calculated
 // and before the results (which need to be in degrees) are passed to the yelp API call
 function radiansToDegrees(latLngRadsArray) {
@@ -353,14 +208,12 @@ function findMidPoint(latLngRadsArray1, latLngRadsArray2) {
 function renderPoint(latLngArray) {
   let marker = L.marker(latLngArray).addTo(mymap);
 }
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
 
 function displayPlaces() {
 
   let places = $(this).attr("data-name");
 
-<<<<<<< HEAD
         function meetAddress(event) {
 
           j = $(this).attr('data-attr');
@@ -368,7 +221,6 @@ function displayPlaces() {
 
           meetPlace = response.businesses[j].location.display_address[0] + ', ' + response.businesses[j].location.display_address[1];
           console.log(meetPlace);
-=======
   let midPointLatitude = 0;
   let midPointLongitude = 0;
 
@@ -462,7 +314,6 @@ function displayPlaces() {
     }
   });
 };
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
 
         }
       }
@@ -470,9 +321,7 @@ function displayPlaces() {
 };
 
 
-<<<<<<< HEAD
 let meetPlace = null;
-=======
 // function to draw the route from a starting point to the selected endpoint from the yelp results
 // pass the single line addresses for the starting and ending loations as arguments
 // startingPointAddr,endingPointAddr
@@ -531,4 +380,3 @@ displayPlaces();
 var polyline = L.polyline(routeVectorLatLngArray, {color: 'red'}).addTo(map);
 // zoom the map to the polyline
 map.fitBounds(polyline.getBounds());
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
