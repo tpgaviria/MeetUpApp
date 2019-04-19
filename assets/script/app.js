@@ -26,21 +26,11 @@ let midPointLong = 0;
 
 
 // map search
-
 $('button').on('click', function () {
 
   event.preventDefault();
   addressSearch();
 })
-
-window.onload = function () {
-  placeSearch({
-    key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-    container: document.querySelector('.place-search-input'),
-    useDeviceLocation: true
-  });
-
-};
 
 
 
@@ -60,16 +50,11 @@ function addressSearch() {
   $.ajax({
     url: geocodingURL
   }).done(function (response) {
-    // console.log(response);
-    // console.log(response.results);
-    // console.log(response.results[0].locations[0].latLng.lat);
-    // console.log(response.results[0].locations[0].latLng.lng);
-    // console.log(response.results[1].locations);
+
 
     var loc1results = response.results[0].locations[0];
     var loc2results = response.results[1].locations[0];
 
-    // console.log(loc1results);
 
     var loc1type = loc1results.geocodeQuality;
     var loc1lat = loc1results.latLng.lat;
@@ -158,21 +143,13 @@ function addressSearch() {
     function renderPoint(latLngArray) {
       var marker = L.marker(latLngArray).addTo(mymap);
     }
-
-
-
     displayPlaces();
-
   })
 }
 
-console.log(midPointLat + midPointLong);
-
-
-
 function displayPlaces() {
 
-  var places = $(this).attr("data-name");
+  // var places = $(this).attr("data-name");
   //var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?text=del&latitude=37.786882&longitude=-122.399972";
   var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=" + midPointLat + "&longitude=" + midPointLong;
 
@@ -188,35 +165,101 @@ function displayPlaces() {
       $(".side-panel").empty();
 
 
-      for (var i = 0; i < 9; i++) {
+
+      for (var i = 0; i <= 9; i++) {
+
+        // console.log(newResult);
+        var name = response.businesses[i].name;
+        // console.log(name);
+        var categories = response.businesses[i].categories[0].title;
+        // console.log(categories);
+        var address = response.businesses[i].location.display_address;
+        // console.log(address);
+        var display_phone = response.businesses[i].display_phone;
+        // console.log(display_phone);
+        var price = response.businesses[i].price;
+        // console.log(price);
+        var rating = response.businesses[i].rating;
+        // console.log(rating);
+        var review_count = response.businesses[i].review_count;
+        // console.log(review_count);
+        var image_url = response.businesses[i].image_url;
+        // var myImage = $('<img>').attr('src', image_url);
 
 
-      var newResult = $('<div>');
-      
-      var name = '<h3>' + response.businesses[i].name + '</h3>';
-      var streetAddress = '<p>' + response.businesses[i].location.display_address[0] + '</p>';
-      var cityAddress = '<p>' + response.businesses[i].location.display_address[1] + '</p>';
-      var categories = '<p>' + response.businesses[i].categories[0].title + '</p>';
 
 
-      // var pTwo = $("<p>").text(address, address1, address2);
-      // var categories = response.Categories;
-      // var pThree = $("<p>").text(categories);
-      // var reviews = response.Reviews;
-      // var pFour = $("<p>").text(reviews);
-      // var img_uRL = response.Image;
-      // var image = $("<img>").attr("src", imgURL);
-      
-      newResult.append(name).append(streetAddress)
-        .append(cityAddress)
-        .append(categories);
-      
 
-      $('.side-panel').append(newResult);
+        var myStars;
 
+        if (rating === 5) {
+          // <img src="" value=>
+          myStars = "/assets/images/small_5@2x.png";
+        }
+        else if (rating === 4.5) {
+          myStars = "/assets/images/small_4_half@2x.png";
+        }
+
+        else if (rating === 4) {
+          myStars = "/assets/images/small_4@2x.png";
+        }
+        else if (rating === 3.5) {
+          myStars = "/assets/images/small_3_half@2x.png";
+        }
+
+
+        else if (rating === 3) {
+          myStars = "/assets/images/small_3@2x.png";
+        }
+        else if (rating === 2.5) {
+          myStars = "/assets/images/small_2_half@2x.png";
+        }
+        else if (rating === 2) {
+          myStars = "/assets/images/small_2@2x.png";
+        }
+        else if (rating === 1.5) {
+          myStars = "/assets/images/small_1_half@2x.png";
+        }
+        else if (rating === 1) {
+          myStars = "/assets/images/small_1@2x.png";
+        } else {
+          myStars = "";
+        }
+
+
+
+        var newResult = $("<div data-attr='" + i + "'>").html(
+          "<img class='pic' src='" + image_url + "'/>" +
+          "<h3>" + (i + 1) + ". " + name + "</h3>" +
+          "<h4 class='cat'>" + categories + "</h4>" +
+          "<h4>" + address + "</h4>" +
+          "<h4>" + display_phone + "</h4>" +
+          "<h4>" + price + "</h4>" +
+          "<h4>" + rating + "</h4> <img src='" + myStars + "'/>" +
+          "<h4> Reviews: " + review_count + "</h4>")
+
+
+
+        newResult.on('click', meetAddress);
+
+
+
+        $('.side-panel').append(newResult);
+
+
+
+        function meetAddress(event) {
+
+          j = $(this).attr('data-attr');
+          console.log(j);
+
+          meetPlace = response.businesses[j].location.display_address[0] + ', ' + response.businesses[j].location.display_address[1];
+          console.log(meetPlace);
+
+        }
       }
-
-
     });
-
 };
+
+
+let meetPlace = null;
