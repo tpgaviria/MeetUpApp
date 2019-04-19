@@ -33,15 +33,6 @@ $('button').on('click', function () {
   addressSearch();
 })
 
-window.onload = function () {
-  placeSearch({
-    key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-    container: document.querySelector('.place-search-input'),
-    useDeviceLocation: true
-
-  });
-};
-
 
 
 function addressSearch() {
@@ -200,7 +191,7 @@ function displayPlaces() {
         var review_count = response.businesses[i].review_count;
         // console.log(review_count);
         var image_url = response.businesses[i].image_url;
-        // var myImage = $('<img>').attr('src', image_url);
+        var myImage = $('<img>').attr('src', image_url);
         console.log(image_url);
         
 
@@ -210,34 +201,34 @@ function displayPlaces() {
 
         if (rating === 5) {
           // <img src="" value=>
-          myStars = "/assets/images/small_5@2x.png";
+          myStars = "./assets/images/small_5@2x.png";
         }
         else if(rating === 4.5){
-          myStars = "/assets/images/small_4_half@2x.png";
+          myStars = "./assets/images/small_4_half@2x.png";
         }
 
         else if (rating === 4) {
-          myStars = "/assets/images/small_4@2x.png";
+          myStars = "./assets/images/small_4@2x.png";
         }
         else if (rating === 3.5) {
-          myStars = "/assets/images/small_3_half@2x.png";
+          myStars = "./assets/images/small_3_half@2x.png";
         }
         
 
         else if (rating === 3) {
-          myStars = "/assets/images/small_3@2x.png";
+          myStars = "./assets/images/small_3@2x.png";
         }
         else if (rating === 2.5) {
-          myStars = "/assets/images/small_2_half@2x.png";
+          myStars = "./assets/images/small_2_half@2x.png";
         }
         else if (rating === 2) {
-          myStars = "/assets/images/small_2@2x.png";
+          myStars = "./assets/images/small_2@2x.png";
         }
         else if (rating === 1.5){
-          myStars = "/assets/images/small_1_half@2x.png";
+          myStars = "./assets/images/small_1_half@2x.png";
         }
         else if (rating === 1) {
-          myStars = "/assets/images/small_1@2x.png";
+          myStars = "./assets/images/small_1@2x.png";
         } else {
           myStars = "";
         }
@@ -247,14 +238,14 @@ function displayPlaces() {
 
 
         var newResult = $("<div>").html(
-          "<h3>" + name + "</h3> <br>" +
-          myImage +
-          "<h4 class='cat'>" + categories + "</h4> <img class='pic' src='"+ image_url + "'/>" +
-          "<h4>" + address + "</h4>" +
-          "<h4>" + display_phone + "</h4>" +
-          "<h4>" + price + "</h4>" +
-          "<h4>" + rating + "</h4> <img src='"+ myStars + "'/>" +
-          "<h4> Reviews: " + review_count + "</h4>"
+          "<h3>" + name + "</h3> " +
+          "</h4> <img class='picture' src='"+ image_url + "'/>" +
+          "<h5 class='cat'>" + categories + 
+          "<h6>" + address + "</h6>" +
+          "<h6>" + display_phone + "</h6>" +
+          "<h6>" + price + "</h6>" +
+          "<h6>" + rating + "</h6> <img class='rate' src='"+ myStars + "'/>" +
+          "<h6> Reviews: " + review_count + "</h6>"
         );
 
 

@@ -47,10 +47,27 @@ form {
       height: 500px;
       overflow-y: auto;
   }
-  .pic{
-      height: 200px;
-      width: 200px;
+  .picture{
+      height: 100px;
+      width: 100px;
+      float: right;
+      background-size:cover;
+      margin: 0 0 15px 15px;
+      background: #eeeeee;
+     
   }
+
+  .rate{
+      width: 104px;
+      height: 17px;
+  }
+
+  h3{
+      font-size: 25px;
+  }
+
   .cat{
-      
+      font-size: 15px;
+      font-style: 
   }
+ 
