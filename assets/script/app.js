@@ -33,14 +33,14 @@ $('button').on('click', function () {
   addressSearch();
 })
 
-window.onload = function () {
-  placeSearch({
-    key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
-    container: document.querySelector('.place-search-input'),
-    useDeviceLocation: true
+// window.onload = function () {
+//   placeSearch({
+//     key: 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM',
+//     container: document.querySelector('.place-search-input'),
+//     useDeviceLocation: true
 
-  });
-};
+//   });
+// };
 
 
 

@@ -41,6 +41,12 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 ui.start('#firebaseui-auth-container', uiConfig);
 
 
+
+
+
+
+
+
 // if user signed in, change nav bar
 var user = firebase.auth().currentUser;
 
