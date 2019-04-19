@@ -8,8 +8,22 @@
 .container {
     margin-top: 20px;
     width: 90%;
-    
 }
+
+#no-user {
+    display:;
+}
+
+#signed-in {
+    display: none;
+}
+
+#greeting {
+    margin-right: 10px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
 
 .map-search {
     border: 1px solid #dddddd;
@@ -42,3 +56,21 @@ form {
   .modal-content {
       color: black;
   }
+
+  .side-panel{
+    height: 500px;
+    overflow-y: auto;
+}
+.pic{
+    height: 150px;
+    width: 150px;
+    float: right;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 12px;
+}
