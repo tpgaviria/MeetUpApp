@@ -280,4 +280,60 @@ function displayPlaces() {
     });
 };
 
+let routeVectorLatLngArray = [];
+
+
+// function to draw the route from a starting point to the selected endpoint from the yelp results
+// pass the single line addresses for the starting and ending loations as arguments
+// startingPointAddr,endingPointAddr
+function displayRouteInfo() {
+
+  let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
+  // let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + startingPointAddr + '&to=' + endingPointAddr;
+  // below is a statis API call for testing purposes.
+  let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA'
+  let directions = $('<p>');
+  let turns = [];
+  let firstMove;
+
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).done(function (response) {
+    console.log('Routing API call response below');
+    console.log(response);
+    // responce.route.legs[0].origNarrative is the first message
+    // responce.route.legs[0].maneuvers[i].narrative
+
+    firstMove = response.route.legs[0].origNarrative;
+    console.log(firstMove);
+    let routingInfoArray = response.route.legs[0].maneuvers;
+    console.log('routing Info array of objects below')
+    console.log(routingInfoArray);
+
+    // this loop runs through the maneuvers array and pushes the value of the narrative key (a string) to the turns array.
+    routingInfoArray.forEach(function (element) {
+      turns.push(element.narrative);
+      let pointLng = element.startPoint.lng;
+      let pointLat = element.startPoint.lat;
+      let pointLatLng = [pointLat, pointLng];
+      routeVectorLatLngArray.push(pointLatLng);
+    });
+
+    console.log('route vector coords array below');
+    console.log(routeVectorLatLngArray);
+    console.log('turns array below');
+    console.log(turns);
+
+    $(directions).append(firstMove);
+
+    for (let i = 0; i < turns.length; i++) {
+      $(directions).append(turns[i] + '<br>');
+    }
+
+    $('#instructions').prepend(directions);
+  });
+}
+
+displayRouteInfo();
 displayPlaces();
