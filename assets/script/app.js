@@ -210,16 +210,16 @@ function displayPlaces() {
 
         if (rating === 5) {
           // <img src="" value=>
-          myStars =  "/assets/images/small_5@2x.png";
+          myStars = "/assets/images/small_5@2x.png";
         }
         else if(rating === 4.5){
-          myStars = "/assets/images/small_4_half@2x.png""
+          myStars = "/assets/images/small_4_half@2x.png";
         }
 
         else if (rating === 4) {
-          myStars = "/assets/images/small_3_half@2x.png";
+          myStars = "/assets/images/small_4@2x.png";
         }
-        else if (rating === 4) {
+        else if (rating === 3.5) {
           myStars = "/assets/images/small_3_half@2x.png";
         }
         
@@ -227,14 +227,14 @@ function displayPlaces() {
         else if (rating === 3) {
           myStars = "/assets/images/small_3@2x.png";
         }
-        else if (rating === 4) {
-          myStars = "/assets/images/small_3_half@2x.png";
+        else if (rating === 2.5) {
+          myStars = "/assets/images/small_2_half@2x.png";
         }
         else if (rating === 2) {
           myStars = "/assets/images/small_2@2x.png";
         }
-        else if (rating === 4) {
-          myStars = "/assets/images/small_3_half@2x.png";
+        else if (rating === 1.5){
+          myStars = "/assets/images/small_1_half@2x.png";
         }
         else if (rating === 1) {
           myStars = "/assets/images/small_1@2x.png";
