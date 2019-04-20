@@ -40,13 +40,18 @@ function addressSearch() {
 
   var geocodingKey = 'SzMAPmTeOI5jHoAV1AdN1Ro2g1r8lACM'
   location1 = $('#location1').val();
+  startingPointAddr1 = location1;
   location2 = $('#location2').val();
+  startingPointAddr2 = location2;
   var geocodingURL = 'https://www.mapquestapi.com/geocoding/v1/batch?&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1&location=' + location1 + '&location=' + location2 + '&key=' + geocodingKey;
   var results;
 
   console.log(location1);
   console.log(location2);
   // console.log(geocodingURL);
+
+
+
 
 
   $.ajax({
@@ -258,7 +263,7 @@ function displayPlaces() {
           console.log(j);
 
           meetPlace = response.businesses[j].location.display_address[0] + ', ' + response.businesses[j].location.display_address[1];
-          console.log(meetPlace);
+          console.log('meetplace: ' + meetPlace);
 
         }
       }
@@ -274,13 +279,18 @@ let meetPlace = '';
 let startingPointAddr1 = '';
 let startingPointAddr2 = '';
 
+
 // function to draw the route from a starting point to the selected endpoint from the yelp results
 // pass the single line addresses for the starting and ending loations as arguments
 // startingPointAddr,endingPointAddr
-function displayRouteInfo(startingPointAddr,meetPlace) {
+function displayRouteInfo(location1, meetPlace) {
+
+  console.log(location1);
+  console.log(meetPlace);
 
   let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
   let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + location1 + '&to=' + meetPlace;
+  
   // below is a static ajax call for testing purposes.
   // let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA'
   let directions = $('<p>');
@@ -296,8 +306,10 @@ function displayRouteInfo(startingPointAddr,meetPlace) {
     // responce.route.legs[0].origNarrative is the first message
     // responce.route.legs[0].maneuvers[i].narrative
 
-    firstMove = response.route.legs[0].origNarrative;
+    console.log(queryURL);
     console.log(firstMove);
+    firstMove = response.route.legs[0].origNarrative;
+    
     let routingInfoArray = response.route.legs[0].maneuvers;
     console.log('routing Info array of objects below')
     console.log(routingInfoArray);
