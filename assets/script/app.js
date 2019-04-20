@@ -1,4 +1,4 @@
-console.log('testing, hi this is the correct js file :)')
+console.log('testing, hi this is the correct js file :)');
 
 $(document).ready(function () {
   // materialize - text input styling initialize
@@ -73,8 +73,8 @@ function addressSearch() {
 
     $('.side-panel').append('Location 1: ' + location1 + '<br>Coordinates: ' + loc1coords + '<br><br>');
     $('.side-panel').append('Location 2: ' + location2 + '<br>Coordinates: ' + loc2coords);
-  })
-}
+  });
+};
 
 // console.log('location 1 radians: ' + loc1CoordsRads);
 // console.log('location 2 radians: ' + loc2CoordsRads);
@@ -87,7 +87,7 @@ function degreesToRadians(latLngArray) {
   let lanInRads = lat * (Math.PI / 180);
   let longInRads = long * (Math.PI / 180);
   return [lanInRads, longInRads];
-}
+};
 
 // Inverse of the degreesToRadians function to be called after the midpoint is calculated
 // and before the results (which need to be in degrees) are passed to the yelp API call
@@ -96,7 +96,7 @@ function radiansToDegrees(latLngRadsArray) {
   let latDegs = lat * (180 / Math.PI);
   let longDegs = long * (180 / Math.PI);
   return [latDegs, longDegs];
-}
+};
 
 // function to render a point on the map
 // latLngArray should be in the form of [51.5, -0.09]
@@ -116,7 +116,7 @@ function findMidPoint(latLngRadsArray1, latLngRadsArray2) {
 
   if (Math.abs(long2 - long1) > Math.PI) {
     long1 += 2 * Math.PI; // crossing anti-meridian
-  }
+  };
 
   let lat3 = (lat1 + lat2) / 2;
   let f1 = Math.tan(Math.PI / 4 + lat1 / 2);
@@ -129,13 +129,13 @@ function findMidPoint(latLngRadsArray1, latLngRadsArray2) {
   }
   //The longitude can be normalised to −180…+180 using (lon+540)%360-180 ??
   return [lat3, long3];
-}
+};
 
 // function to render a point on the map
 // latLngArray should be in the form of [51.5, -0.09]
 function renderPoint(latLngArray) {
   let marker = L.marker(latLngArray).addTo(mymap);
-}
+};
 
 function displayPlaces() {
 
@@ -164,7 +164,8 @@ function displayPlaces() {
       // console.log(name);
       let categories = response.businesses[i].categories[0].title;
       // console.log(categories);
-      let address = response.businesses[i].location.display_address;
+      let address = response.businesses[i].location.display_address[0];
+      let zipcode = response.businesses[i].location.display_address[1];
       // console.log(address);
       let display_phone = response.businesses[i].display_phone;
       // console.log(display_phone);
@@ -212,95 +213,103 @@ function displayPlaces() {
           break;
         default:
           myStars = "";
-      }
+      };
 
       console.log("hey I am here", myStars);
 
-      let newResult = $("<div>").html(
-        "<h3>" + name + "</h3> <br>" +
-        myImage +
-        "<h4 class='cat'>" + categories + "</h4> <img class='pic' src='" + image_url + "'/>" +
-        "<h4>" + address + "</h4>" +
-        "<h4>" + display_phone + "</h4>" +
-        "<h4>" + price + "</h4>" +
-        "<h4>" + rating + "</h4> <img src='" + myStars + "'/>" +
-        "<h4> Reviews: " + review_count + "</h4>"
-      );
+
+      let newResult = $("<div data-attr='" + i + "'>").html(
+        "<h3>" + name + "</h3> " +
+        "</h4> <img class='picture' src='" + image_url + "'/>" +
+        "<h5 class='cat'>" + categories +
+        "<h6>" + address + "</h6>" +
+        "<h6>" + zipcode + "</h6>" +
+        "<h6 class='phone'>" + "<i class='fas fa-phone'></i>" + display_phone + "</h6>" +
+        "<h6 class='price'>" + price + "</h6>" +
+        "<h6 class='rate'>" + rating + "</h6> <img class='rate' src='" + myStars + "'>" +
+        "<h6 class='review'>" + review_count + " reviews" + "</h6>")
+
 
       // $('.side-panel').prepend(newResult);
       console.log("new ", newResult);
+
+      newResult.on('click', meetAddress);
+
       $('.side-panel').append(newResult);
-    }
+
+      }
+
+
+      function meetAddress(event) {
+
+        j = $(this).attr('data-attr');
+        console.log(j);
+
+        meetPlace = response.businesses[j].location.display_address[0] + ', ' + response.businesses[j].location.display_address[1];
+        console.log(meetPlace);
+
+      };
   });
-};
-
-        var newResult = $("<div>").html(
-          "<h3>" + name + "</h3> " +
-          "</h4> <img class='picture' src='"+ image_url + "'/>" +
-          "<h5 class='cat'>" + categories + 
-          "<h6>" + address + "</h6>" +
-          "<h6>" + display_phone + "</h6>" +
-          "<h6>" + price + "</h6>" +
-          "<h6>" + rating + "</h6> <img class='rate' src='"+ myStars + "'/>" +
-          "<h6> Reviews: " + review_count + "</h6>"
-        );
+  };
 
 
-// function to draw the route from a starting point to the selected endpoint from the yelp results
-// pass the single line addresses for the starting and ending loations as arguments
-// startingPointAddr,endingPointAddr
-function displayRouteInfo(startingPointAddr,endingPointAddr) {
 
-  let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
-  // let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + startingPointAddr + '&to=' + endingPointAddr;
-  // below is a statis API call for testing purposes.
-  let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA'
-  let directions = $('<p>');
-  let turns = [];
-  let firstMove;
 
-  $.ajax({
-    url: queryURL,
-    method: "GET",
-  }).done(function (response) {
-    console.log('Routing API call response below');
-    console.log(response);
-    // responce.route.legs[0].origNarrative is the first message
-    // responce.route.legs[0].maneuvers[i].narrative
+  // function to draw the route from a starting point to the selected endpoint from the yelp results
+  // pass the single line addresses for the starting and ending loations as arguments
+  // startingPointAddr,endingPointAddr
+  function displayRouteInfo(startingPointAddr, endingPointAddr) {
 
-    firstMove = response.route.legs[0].origNarrative;
-    console.log(firstMove);
-    let routingInfoArray = response.route.legs[0].maneuvers;
-    console.log('routing Info array of objects below')
-    console.log(routingInfoArray);
+    let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
+    // let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + startingPointAddr + '&to=' + endingPointAddr;
+    // below is a statis API call for testing purposes.
+    let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA'
+    let directions = $('<p>');
+    let turns = [];
+    let firstMove;
 
-    // this loop runs through the maneuvers array and pushes the value of the narrative key (a string) to the turns array.
-    routingInfoArray.forEach(function (element) {
-      turns.push(element.narrative);
-      let pointLng = element.startPoint.lng;
-      let pointLat = element.startPoint.lat;
-      let pointLatLng = [pointLat, pointLng];
-      routeVectorLatLngArray.push(pointLatLng);
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).done(function (response) {
+      console.log('Routing API call response below');
+      console.log(response);
+      // responce.route.legs[0].origNarrative is the first message
+      // responce.route.legs[0].maneuvers[i].narrative
+
+      firstMove = response.route.legs[0].origNarrative;
+      console.log(firstMove);
+      let routingInfoArray = response.route.legs[0].maneuvers;
+      console.log('routing Info array of objects below')
+      console.log(routingInfoArray);
+
+      // this loop runs through the maneuvers array and pushes the value of the narrative key (a string) to the turns array.
+      routingInfoArray.forEach(function (element) {
+        turns.push(element.narrative);
+        let pointLng = element.startPoint.lng;
+        let pointLat = element.startPoint.lat;
+        let pointLatLng = [pointLat, pointLng];
+        routeVectorLatLngArray.push(pointLatLng);
+      });
+
+      console.log('route vector coords array below');
+      console.log(routeVectorLatLngArray);
+      console.log('turns array below');
+      console.log(turns);
+
+      $(directions).append(firstMove);
+
+      for (let i = 0; i < turns.length; i++) {
+        $(directions).append(turns[i] + '<br>');
+      }
+
+      $('#instructions').prepend(directions);
     });
+  };
 
-    console.log('route vector coords array below');
-    console.log(routeVectorLatLngArray);
-    console.log('turns array below');
-    console.log(turns);
+  displayRouteInfo();
+  displayPlaces();
 
-    $(directions).append(firstMove);
-
-    for (let i = 0; i < turns.length; i++) {
-      $(directions).append(turns[i] + '<br>');
-    }
-
-    $('#instructions').prepend(directions);
-  });
-}
-
-displayRouteInfo();
-displayPlaces();
-
-var polyline = L.polyline(routeVectorLatLngArray, {color: 'red'}).addTo(map);
+//var polyline = L.polyline(routeVectorLatLngArray, {color: 'red'}).addTo(map);
 // zoom the map to the polyline
-map.fitBounds(polyline.getBounds());
+//map.fitBounds(polyline.getBounds());
