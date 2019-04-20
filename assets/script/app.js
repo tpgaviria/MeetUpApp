@@ -32,8 +32,7 @@ $('button').on('click', function () {
   addressSearch();
 })
 
-var location1 = '';
-var location2 = '';
+
 
 
 function addressSearch() {
@@ -130,6 +129,8 @@ function addressSearch() {
 
       if (Math.abs(long2 - long1) > Math.PI) {
         long1 += 2 * Math.PI; // crossing anti-meridian
+
+
       }
 
       var lat3 = (lat1 + lat2) / 2;
@@ -148,9 +149,15 @@ function addressSearch() {
     // function to render a point on the map
     // latLngArray should be in the form of [51.5, -0.09]
     function renderPoint(latLngArray) {
-      var marker = L.marker(latLngArray).addTo(mymap);
+      var marker = L.marker(latLngArray).addTo(map);
     }
+    // renderPoint();
     displayPlaces();
+
+
+    map.panTo(new L.LatLng(midPointLat, midPointLong));
+
+
   })
 }
 
@@ -248,23 +255,24 @@ function displayPlaces() {
 
 
         newResult.on('click', meetAddress);
-        newResult.on('click', displayRouteInfo);
 
 
 
 
         $('.side-panel').append(newResult);
 
-
-
+        
         function meetAddress(event) {
-
+          
           j = $(this).attr('data-attr');
           console.log(j);
-
+          
           meetPlace = response.businesses[j].location.display_address[0] + ', ' + response.businesses[j].location.display_address[1];
           console.log('meetplace: ' + meetPlace);
 
+          displayRouteInfo();
+          
+          map.panTo(new L.LatLng(midPointLat, midPointLong));
         }
       }
     });
@@ -279,6 +287,11 @@ let meetPlace = '';
 let startingPointAddr1 = '';
 let startingPointAddr2 = '';
 
+console.log(location1);
+console.log(meetPlace);
+
+var location1 = '';
+var location2 = '';
 
 // function to draw the route from a starting point to the selected endpoint from the yelp results
 // pass the single line addresses for the starting and ending loations as arguments
@@ -287,6 +300,9 @@ function displayRouteInfo(location1, meetPlace) {
 
   console.log(location1);
   console.log(meetPlace);
+
+
+
 
   let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
   let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + location1 + '&to=' + meetPlace;
@@ -334,8 +350,10 @@ function displayRouteInfo(location1, meetPlace) {
       $(directions).append(turns[i] + '<br>');
     }
 
+    $('#instructions').empty();
+    $('#instructions').text('Directions to your meet up place:');
 
-    $('#instructions').prepend(directions);
-    renderPoint(midPointInDeg)
+    $('#instructions').append(directions);
+    
   });
 }
