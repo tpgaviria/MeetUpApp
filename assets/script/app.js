@@ -305,7 +305,7 @@ function displayRouteInfo(location1, meetPlace) {
 
 
   let APIkey = '6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F';
-  let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + location1 + '&to=' + meetPlace;
+  let queryURL = 'https://www.mapquestapi.com/directions/v2/route?key=' + APIkey + '&from=' + location1 + '&to=' + meetPlace;
   
   // below is a static ajax call for testing purposes.
   // let queryURL = 'http://www.mapquestapi.com/directions/v2/route?key=6scse9ETJfXFQIaeRDPlQAgvAI2hyN7F&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA'
