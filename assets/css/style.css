@@ -11,11 +11,11 @@
 }
 
 #no-user {
-    display:;
+    display: none;
 }
 
 #signed-in {
-    display: none;
+    display: ;
 }
 
 #greeting {
