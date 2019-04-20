@@ -180,7 +180,7 @@ function displayPlaces() {
       let myImage = $('<img>').attr('src', image_url);
 
       console.log(image_url);
-
+      let logo = "/assets/images/Yelp_trademark_RGB_outline.png";
       let myStars;
 
       switch (rating) {
@@ -225,9 +225,10 @@ function displayPlaces() {
         "<h6>" + address + "</h6>" +
         "<h6>" + zipcode + "</h6>" +
         "<h6 class='phone'>" + "<i class='fas fa-phone'></i>" + display_phone + "</h6>" +
-        "<h6 class='price'>" + price + "</h6>" +
-        "<h6 class='rate'>" + rating + "</h6> <img class='rate' src='" + myStars + "'>" +
-        "<h6 class='review'>" + review_count + " reviews" + "</h6>")
+        "<h6 class='price'>" + price +  "</h6>" +
+        "</h6> <img class='rate' src='" + myStars + "'>" +
+        "<h6 class='review'>" + review_count + " reviews" + " " + "<img class='logo' src='" + logo + "'>" + "</h6>"
+        )
 
 
       // $('.side-panel').prepend(newResult);
