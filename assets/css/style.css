@@ -58,14 +58,20 @@ form {
   }
 
   .side-panel{
-<<<<<<< HEAD
-    height: 500px;
+    height: 550px;
     overflow-y: auto;
 }
+
 .pic{
     height: 150px;
-    width: 150px;
+    width: ;
     float: right;
+}
+
+h2 {
+    font-size: 22pt;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 
 h3 {
@@ -74,16 +80,16 @@ h3 {
 
 h4 {
     font-size: 12px;
+    margin: 3px;
 }
-=======
-      height: 500px;
-      overflow-y: auto;
-  }
-  .pic{
-      height: 200px;
-      width: 200px;
-  }
-  .cat{
-      
-  }
->>>>>>> da24f8415642f30e3facb84fc15eaced5519078e
+
+
+#instructions {
+    color: grey;
+    font-size: 16pt;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.results:hover {
+    background: #ececec;
+}
