@@ -3,8 +3,7 @@ Georgia Tech Coding Bootcamp - Project # 1
 
 
 
-Squadron - Meetup with Your Friends
-(In Development)
+Squadron - Meetup with Your Friends (In Development)  
 Contributors: Tanya Gaviria, Jake David, Claudia Gutierrez, Cameron Wright
 
 A Web Broswer based app
